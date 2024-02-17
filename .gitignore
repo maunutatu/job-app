@@ -1,1 +1,4 @@
-/.idea
+.idea/
+xcuserdata/
+.build/
+.DS_Store
