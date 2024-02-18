@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		2712043A2B81584D00F618DB /* JobApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271204392B81584D00F618DB /* JobApp.swift */; };
+		27EBC5B42B818E5300F769B1 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = 27EBC5B32B818E5300F769B1 /* Networking */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		271204362B81584D00F618DB /* JobApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JobApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		271204392B81584D00F618DB /* JobApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobApp.swift; sourceTree = "<group>"; };
 		2712043F2B81584E00F618DB /* JobApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JobApp.entitlements; sourceTree = "<group>"; };
+		27EBC5AD2B818B9100F769B1 /* Networking */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Networking; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -21,6 +23,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27EBC5B42B818E5300F769B1 /* Networking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,6 +52,7 @@
 			children = (
 				271204392B81584D00F618DB /* JobApp.swift */,
 				2712043F2B81584E00F618DB /* JobApp.entitlements */,
+				27EBC5AD2B818B9100F769B1 /* Networking */,
 			);
 			path = JobApp;
 			sourceTree = "<group>";
@@ -70,6 +74,9 @@
 			dependencies = (
 			);
 			name = JobApp;
+			packageProductDependencies = (
+				27EBC5B32B818E5300F769B1 /* Networking */,
+			);
 			productName = JobApp;
 			productReference = 271204362B81584D00F618DB /* JobApp.app */;
 			productType = "com.apple.product-type.application";
@@ -358,6 +365,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		27EBC5B32B818E5300F769B1 /* Networking */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Networking;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 271204182B81556C00F618DB /* Project object */;
 }
