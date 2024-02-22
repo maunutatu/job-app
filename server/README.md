@@ -20,3 +20,8 @@ API_PORT=whateverPortYouWant
 docker-compose --env-file .env up -d
 ```
 5. Call the API locally at POSTGRES_HOST:API_PORT
+
+In case you need to add mock data into the database, you can do so by running the insert_mockdata.sh script. (Make sure to have the .env file created and [psql](https://www.postgresql.org/download/) installed.)
+```bash
+bash insert_mockdata.sh
+```
