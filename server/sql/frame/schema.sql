@@ -21,6 +21,3 @@ CREATE TABLE IF NOT EXISTS job_listing (
     working_hours TEXT NOT NULL,
     employment_type TEXT NOT NULL
     );
-
-ALTER TABLE job_listing
-ALTER COLUMN end_date DROP NOT NULL;

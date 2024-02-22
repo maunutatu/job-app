@@ -7,22 +7,54 @@ package database
 
 import (
 	"context"
+
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 const getJobListings = `-- name: GetJobListings :many
-SELECT id, title, description, salary, company, date_posted, start_date, end_date, location, field, working_hours, employment_type
-FROM job_listing
+SELECT
+    jl.id,
+    jl.title,
+    jl.description,
+    jl.salary,
+    c.name AS company,
+    jl.date_posted,
+    jl.start_date,
+    jl.end_date,
+    jl.location,
+    jl.field,
+    jl.working_hours,
+    jl.employment_type
+FROM
+    job_listing jl
+        JOIN
+    company c ON jl.company = c.id
 `
 
-func (q *Queries) GetJobListings(ctx context.Context) ([]JobListing, error) {
+type GetJobListingsRow struct {
+	ID             int32
+	Title          string
+	Description    string
+	Salary         pgtype.Numeric
+	Company        string
+	DatePosted     pgtype.Date
+	StartDate      pgtype.Date
+	EndDate        pgtype.Date
+	Location       string
+	Field          string
+	WorkingHours   string
+	EmploymentType string
+}
+
+func (q *Queries) GetJobListings(ctx context.Context) ([]GetJobListingsRow, error) {
 	rows, err := q.db.Query(ctx, getJobListings)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []JobListing
+	var items []GetJobListingsRow
 	for rows.Next() {
-		var i JobListing
+		var i GetJobListingsRow
 		if err := rows.Scan(
 			&i.ID,
 			&i.Title,
