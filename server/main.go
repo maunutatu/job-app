@@ -2,8 +2,11 @@ package main
 
 import (
 	"context"
+	"github.com/gin-gonic/gin"
 	"github.com/jackc/pgx/v5"
 	"os"
+	jobListingApi "server/api"
+	"server/database"
 )
 
 func main() {
@@ -27,4 +30,13 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	queries := database.New(conn)
+
+	router := gin.Default()
+
+	jobListingService := jobListingApi.NewService(queries)
+	jobListingService.RegisterHandlers(router)
+
+	router.Run()
 }
