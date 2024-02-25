@@ -10,6 +10,7 @@
 		2712043A2B81584D00F618DB /* JobApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271204392B81584D00F618DB /* JobApp.swift */; };
 		2740DA302B8BD261001E2C4A /* SampleJobs.json in Resources */ = {isa = PBXBuildFile; fileRef = 2740DA2F2B8BD261001E2C4A /* SampleJobs.json */; };
 		2740DA332B8BD61A001E2C4A /* Configure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740DA322B8BD61A001E2C4A /* Configure.swift */; };
+		27418FC72B8BE2E1004E078E /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27418FC62B8BE2E1004E078E /* Icons.xcassets */; };
 		27EBC5AF2B818C8700F769B1 /* JobService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EBC5AE2B818C8700F769B1 /* JobService.swift */; };
 		27EBC5B42B818E5300F769B1 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = 27EBC5B32B818E5300F769B1 /* Networking */; };
 		27EBC5B62B81905900F769B1 /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EBC5B52B81905900F769B1 /* Job.swift */; };
@@ -21,6 +22,7 @@
 		2712043F2B81584E00F618DB /* JobApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JobApp.entitlements; sourceTree = "<group>"; };
 		2740DA2F2B8BD261001E2C4A /* SampleJobs.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SampleJobs.json; sourceTree = "<group>"; };
 		2740DA322B8BD61A001E2C4A /* Configure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configure.swift; sourceTree = "<group>"; };
+		27418FC62B8BE2E1004E078E /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		27EBC5AD2B818B9100F769B1 /* Networking */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Networking; sourceTree = "<group>"; };
 		27EBC5AE2B818C8700F769B1 /* JobService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobService.swift; sourceTree = "<group>"; };
 		27EBC5B52B81905900F769B1 /* Job.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Job.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 			children = (
 				2712043F2B81584E00F618DB /* JobApp.entitlements */,
 				2740DA2F2B8BD261001E2C4A /* SampleJobs.json */,
+				27418FC62B8BE2E1004E078E /* Icons.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -162,6 +165,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27418FC72B8BE2E1004E078E /* Icons.xcassets in Resources */,
 				2740DA302B8BD261001E2C4A /* SampleJobs.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,6 +229,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=iphoneos*]" = "App-iOS";
+				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=iphonesimulator*]" = "App-iOS";
+				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=macosx*]" = "App-macOS";
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -279,6 +286,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -314,6 +322,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=iphoneos*]" = "App-iOS";
+				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=iphonesimulator*]" = "App-iOS";
+				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=macosx*]" = "App-macOS";
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -362,6 +373,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
