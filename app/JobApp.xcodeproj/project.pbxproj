@@ -8,12 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		2712043A2B81584D00F618DB /* JobApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271204392B81584D00F618DB /* JobApp.swift */; };
+		2740DA302B8BD261001E2C4A /* SampleJobs.json in Resources */ = {isa = PBXBuildFile; fileRef = 2740DA2F2B8BD261001E2C4A /* SampleJobs.json */; };
+		2740DA332B8BD61A001E2C4A /* Configure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740DA322B8BD61A001E2C4A /* Configure.swift */; };
+		27EBC5AF2B818C8700F769B1 /* JobService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EBC5AE2B818C8700F769B1 /* JobService.swift */; };
+		27EBC5B42B818E5300F769B1 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = 27EBC5B32B818E5300F769B1 /* Networking */; };
+		27EBC5B62B81905900F769B1 /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EBC5B52B81905900F769B1 /* Job.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		271204362B81584D00F618DB /* JobApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JobApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		271204392B81584D00F618DB /* JobApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobApp.swift; sourceTree = "<group>"; };
 		2712043F2B81584E00F618DB /* JobApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JobApp.entitlements; sourceTree = "<group>"; };
+		2740DA2F2B8BD261001E2C4A /* SampleJobs.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SampleJobs.json; sourceTree = "<group>"; };
+		2740DA322B8BD61A001E2C4A /* Configure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configure.swift; sourceTree = "<group>"; };
+		27EBC5AD2B818B9100F769B1 /* Networking */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Networking; sourceTree = "<group>"; };
+		27EBC5AE2B818C8700F769B1 /* JobService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobService.swift; sourceTree = "<group>"; };
+		27EBC5B52B81905900F769B1 /* Job.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Job.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -21,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27EBC5B42B818E5300F769B1 /* Networking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,9 +59,46 @@
 			isa = PBXGroup;
 			children = (
 				271204392B81584D00F618DB /* JobApp.swift */,
-				2712043F2B81584E00F618DB /* JobApp.entitlements */,
+				27EBC5BA2B8193FF00F769B1 /* Services */,
+				27EBC5B92B8193F700F769B1 /* Models */,
+				2740DA312B8BD60E001E2C4A /* Helpers */,
+				2740DA2E2B8BD22F001E2C4A /* Resources */,
+				27EBC5AD2B818B9100F769B1 /* Networking */,
 			);
 			path = JobApp;
+			sourceTree = "<group>";
+		};
+		2740DA2E2B8BD22F001E2C4A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2712043F2B81584E00F618DB /* JobApp.entitlements */,
+				2740DA2F2B8BD261001E2C4A /* SampleJobs.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		2740DA312B8BD60E001E2C4A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2740DA322B8BD61A001E2C4A /* Configure.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		27EBC5B92B8193F700F769B1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				27EBC5B52B81905900F769B1 /* Job.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		27EBC5BA2B8193FF00F769B1 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				27EBC5AE2B818C8700F769B1 /* JobService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -70,6 +118,9 @@
 			dependencies = (
 			);
 			name = JobApp;
+			packageProductDependencies = (
+				27EBC5B32B818E5300F769B1 /* Networking */,
+			);
 			productName = JobApp;
 			productReference = 271204362B81584D00F618DB /* JobApp.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +162,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2740DA302B8BD261001E2C4A /* SampleJobs.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,6 +196,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2712043A2B81584D00F618DB /* JobApp.swift in Sources */,
+				2740DA332B8BD61A001E2C4A /* Configure.swift in Sources */,
+				27EBC5B62B81905900F769B1 /* Job.swift in Sources */,
+				27EBC5AF2B818C8700F769B1 /* JobService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,7 +254,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = JobApp/JobApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = JobApp/Resources/JobApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
@@ -288,7 +343,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = JobApp/JobApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = JobApp/Resources/JobApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
@@ -358,6 +413,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		27EBC5B32B818E5300F769B1 /* Networking */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Networking;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 271204182B81556C00F618DB /* Project object */;
 }
