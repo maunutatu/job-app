@@ -33,7 +33,7 @@ class SampleJobService: JobServiceProtocol {
 		$0.dateDecodingStrategy = .formatted(Job.dateFormatter)
 	}
 
-	func jobs() async throws -> [Job] {
+	func jobs() throws -> [Job] {
 		guard let url = Bundle.main.url(forResource: "SampleJobs", withExtension: "json") else {
 			fatalError("Sample data file not found")
 		}

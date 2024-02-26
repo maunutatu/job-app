@@ -5,6 +5,7 @@ struct Job: Identifiable, Codable {
 	let title: String
 	let description: String
 	let salary: Decimal
+	let company: String
 	let datePosted: Date
 	let startDate: Date
 	let endDate: Date?
@@ -18,6 +19,7 @@ struct Job: Identifiable, Codable {
 		case title = "Title"
 		case description = "Description"
 		case salary = "Salary"
+		case company = "Company"
 		case datePosted = "DatePosted"
 		case startDate = "StartDate"
 		case endDate = "EndDate"
