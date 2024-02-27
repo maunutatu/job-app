@@ -36,6 +36,7 @@ struct JobList<ViewModel: JobsViewModelProtocol>: View {
 					.listRowBackground(Color.clear)
 			}
 			.listStyle(.plain)
+			.searchable(text: $viewModel.searchText)
 		} detail: {
 			if let selectedJob {
 				NavigationStack {
