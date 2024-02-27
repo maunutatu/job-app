@@ -18,6 +18,38 @@
         }
       }
     },
+    "filters.employmentType" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Employment type"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Työsuhteen tyyppi"
+          }
+        }
+      }
+    },
+    "filters.location" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sijainti"
+          }
+        }
+      }
+    },
     "job.applyButton" : {
       "extractionState" : "manual",
       "localizations" : {

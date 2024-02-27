@@ -38,7 +38,7 @@ struct JobView: View {
 		VStack(alignment: .leading, spacing: 8) {
 			Text(String(format: String(localized: "job.postedAt"), job.datePosted.formatted(date: .abbreviated, time: .omitted)))
 				.font(.footnote)
-			Text(job.employmentType)
+			Text(job.employmentType + ", " + job.workingHours)
 				.font(.caption)
 			Spacer()
 			Text(job.description)
