@@ -3,6 +3,7 @@ import SwiftUI
 struct JobList<ViewModel: JobsViewModelProtocol>: View {
 	@ObservedObject private var viewModel: ViewModel
 	@State private var selectedJob: Job?
+	@State private var filtersShown = false
 
 	init(viewModel: ViewModel) {
 		self.viewModel = viewModel
@@ -21,32 +22,57 @@ struct JobList<ViewModel: JobsViewModelProtocol>: View {
 
 	@ViewBuilder
 	func content(jobs: [Job]) -> some View {
-		NavigationSplitView(columnVisibility: .constant(.all)) {
-			List(jobs, id: \.id, selection: $selectedJob) { job in
-				JobListRow(job: job)
-					.background(
-						RoundedRectangle(cornerRadius: 12)
-							.foregroundStyle(.background)
-							.shadow(color: .gray, radius: 1)
-					)
-					.onTapGesture {
-						selectedJob = job
-					}
-					.listRowSeparator(.hidden)
-					.listRowBackground(Color.clear)
-			}
-			.listStyle(.plain)
-			.searchable(text: $viewModel.searchText)
-		} detail: {
-			if let selectedJob {
-				NavigationStack {
-					JobView(job: selectedJob)
-				}
-			} else {
-				Text("job.noneSelected")
-			}
-		}
+		NavigationSplitView(
+			columnVisibility: .constant(.all),
+			sidebar: { sidebar(with: jobs) },
+			detail: { detail }
+		)
 		.navigationSplitViewStyle(.balanced)
+	}
+
+	@ViewBuilder
+	func row(for job: Job) -> some View {
+		JobListRow(job: job)
+			.background(
+				RoundedRectangle(cornerRadius: 12)
+					.foregroundStyle(.background)
+					.shadow(color: .gray, radius: 1)
+			)
+			.onTapGesture {
+				selectedJob = job
+			}
+			.listRowSeparator(.hidden)
+			.listRowBackground(Color.clear)
+	}
+
+	@ViewBuilder
+	private func sidebar(with jobs: [Job]) -> some View {
+		List(jobs, id: \.id, selection: $selectedJob, rowContent: row)
+			.listStyle(.plain)
+			.animation(.default, value: jobs)
+			.searchable(text: $viewModel.searchText)
+			.toolbar {
+				Button {
+					filtersShown = true
+				} label: {
+					Image(systemName: "line.3.horizontal.decrease.circle")
+				}
+				.popover(isPresented: $filtersShown) {
+					FiltersView(viewModel: viewModel.filtersViewModel)
+						.presentationDetents([.medium])
+				}
+			}
+	}
+
+	@ViewBuilder
+	private var detail: some View {
+		if let selectedJob {
+			NavigationStack {
+				JobView(job: selectedJob)
+			}
+		} else {
+			Text("job.noneSelected")
+		}
 	}
 }
 

@@ -14,6 +14,9 @@
 		275297DF2B8BFF6F00A8B612 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275297DE2B8BFF6F00A8B612 /* ErrorView.swift */; };
 		275297E12B8C079300A8B612 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 275297E02B8C079300A8B612 /* Localizable.xcstrings */; };
 		275297E22B8C0BF100A8B612 /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D601D82B8BF190002CC59D /* PreviewData.swift */; };
+		278E36752B8E849300EAEC55 /* FiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278E36742B8E849300EAEC55 /* FiltersView.swift */; };
+		278E36782B8E895700EAEC55 /* Flow in Frameworks */ = {isa = PBXBuildFile; productRef = 278E36772B8E895700EAEC55 /* Flow */; };
+		278E367A2B8E8F9900EAEC55 /* FiltersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278E36792B8E8F9900EAEC55 /* FiltersViewModel.swift */; };
 		27C829422B8D01DE00D622C6 /* JobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C829412B8D01DE00D622C6 /* JobView.swift */; };
 		27C829442B8DF35F00D622C6 /* JobApplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C829432B8DF35F00D622C6 /* JobApplicationView.swift */; };
 		27D601D22B8BED44002CC59D /* JobsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D601D12B8BED44002CC59D /* JobsViewModel.swift */; };
@@ -33,6 +36,8 @@
 		27418FC62B8BE2E1004E078E /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		275297DE2B8BFF6F00A8B612 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		275297E02B8C079300A8B612 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		278E36742B8E849300EAEC55 /* FiltersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersView.swift; sourceTree = "<group>"; };
+		278E36792B8E8F9900EAEC55 /* FiltersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewModel.swift; sourceTree = "<group>"; };
 		27C829412B8D01DE00D622C6 /* JobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobView.swift; sourceTree = "<group>"; };
 		27C829432B8DF35F00D622C6 /* JobApplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobApplicationView.swift; sourceTree = "<group>"; };
 		27D601D12B8BED44002CC59D /* JobsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsViewModel.swift; sourceTree = "<group>"; };
@@ -50,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				278E36782B8E895700EAEC55 /* Flow in Frameworks */,
 				27EBC5B42B818E5300F769B1 /* Networking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -114,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				27D601D32B8BEDDE002CC59D /* JobList.swift */,
+				278E36742B8E849300EAEC55 /* FiltersView.swift */,
 				27D601D62B8BF114002CC59D /* JobListRow.swift */,
 				27C829412B8D01DE00D622C6 /* JobView.swift */,
 				27C829432B8DF35F00D622C6 /* JobApplicationView.swift */,
@@ -126,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				27D601D12B8BED44002CC59D /* JobsViewModel.swift */,
+				278E36792B8E8F9900EAEC55 /* FiltersViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -165,6 +173,7 @@
 			name = JobApp;
 			packageProductDependencies = (
 				27EBC5B32B818E5300F769B1 /* Networking */,
+				278E36772B8E895700EAEC55 /* Flow */,
 			);
 			productName = JobApp;
 			productReference = 271204362B81584D00F618DB /* JobApp.app */;
@@ -194,6 +203,9 @@
 				fi,
 			);
 			mainGroup = 271204172B81556C00F618DB;
+			packageReferences = (
+				278E36762B8E895700EAEC55 /* XCRemoteSwiftPackageReference "SwiftUI-Flow" */,
+			);
 			productRefGroup = 271204372B81584D00F618DB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -247,12 +259,14 @@
 				27D601D42B8BEDDE002CC59D /* JobList.swift in Sources */,
 				2712043A2B81584D00F618DB /* JobApp.swift in Sources */,
 				2740DA332B8BD61A001E2C4A /* Configure.swift in Sources */,
+				278E36752B8E849300EAEC55 /* FiltersView.swift in Sources */,
 				27C829442B8DF35F00D622C6 /* JobApplicationView.swift in Sources */,
 				27C829422B8D01DE00D622C6 /* JobView.swift in Sources */,
 				27EBC5B62B81905900F769B1 /* Job.swift in Sources */,
 				275297E22B8C0BF100A8B612 /* PreviewData.swift in Sources */,
 				27D601D72B8BF114002CC59D /* JobListRow.swift in Sources */,
 				275297DF2B8BFF6F00A8B612 /* ErrorView.swift in Sources */,
+				278E367A2B8E8F9900EAEC55 /* FiltersViewModel.swift in Sources */,
 				27EBC5AF2B818C8700F769B1 /* JobService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -475,7 +489,23 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		278E36762B8E895700EAEC55 /* XCRemoteSwiftPackageReference "SwiftUI-Flow" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:tevelee/SwiftUI-Flow";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		278E36772B8E895700EAEC55 /* Flow */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 278E36762B8E895700EAEC55 /* XCRemoteSwiftPackageReference "SwiftUI-Flow" */;
+			productName = Flow;
+		};
 		27EBC5B32B818E5300F769B1 /* Networking */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Networking;
