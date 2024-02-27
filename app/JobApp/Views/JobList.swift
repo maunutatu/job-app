@@ -2,6 +2,7 @@ import SwiftUI
 
 struct JobList<ViewModel: JobsViewModelProtocol>: View {
 	@ObservedObject private var viewModel: ViewModel
+	@State private var selectedJob: Job?
 
 	init(viewModel: ViewModel) {
 		self.viewModel = viewModel
@@ -20,15 +21,31 @@ struct JobList<ViewModel: JobsViewModelProtocol>: View {
 
 	@ViewBuilder
 	func content(jobs: [Job]) -> some View {
-		List(jobs) { job in
-			JobListRow(job: job)
-				.background(
-					RoundedRectangle(cornerRadius: 12)
-						.foregroundStyle(.background)
-						.shadow(color: .gray, radius: 1)
-				)
-				.listRowSeparator(.hidden)
-		}.listStyle(.plain)
+		NavigationSplitView(columnVisibility: .constant(.all)) {
+			List(jobs, id: \.id, selection: $selectedJob) { job in
+				JobListRow(job: job)
+					.background(
+						RoundedRectangle(cornerRadius: 12)
+							.foregroundStyle(.background)
+							.shadow(color: .gray, radius: 1)
+					)
+					.onTapGesture {
+						selectedJob = job
+					}
+					.listRowSeparator(.hidden)
+					.listRowBackground(Color.clear)
+			}
+			.listStyle(.plain)
+		} detail: {
+			if let selectedJob {
+				NavigationStack {
+					JobView(job: selectedJob)
+				}
+			} else {
+				Text("job.noneSelected")
+			}
+		}
+		.navigationSplitViewStyle(.balanced)
 	}
 }
 
