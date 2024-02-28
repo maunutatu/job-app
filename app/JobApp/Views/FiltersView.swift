@@ -32,8 +32,19 @@ struct FiltersView<ViewModel: FiltersViewModelProtocol>: View {
 					}
 				}
 			}
-			.frame(maxHeight: .infinity, alignment: .top)
+			VStack(alignment: .leading) {
+				Text("filters.field")
+					.font(.headline)
+				Divider()
+				HFlow {
+					ForEach(Array(viewModel.fields.enumerated()), id: \.offset) { index, field in
+						Toggle(field.name, isOn: $viewModel.fields[index].isEnabled)
+							.toggleStyle(.button)
+					}
+				}
+			}
 		}
+		.frame(maxHeight: .infinity, alignment: .top)
 		.padding()
 		.frame(idealWidth: 400)
 	}

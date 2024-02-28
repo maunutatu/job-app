@@ -34,6 +34,22 @@
         }
       }
     },
+    "filters.field" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Field"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ala"
+          }
+        }
+      }
+    },
     "filters.location" : {
       "localizations" : {
         "en" : {

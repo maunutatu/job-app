@@ -5,6 +5,7 @@ import Combine
 protocol FiltersViewModelProtocol: ObservableObject {
 	var locations: [LocationState] { get set }
 	var employmentTypes: [EmploymentTypeState] { get set }
+	var fields: [FieldState] { get set }
 }
 
 class LocationState: ObservableObject {
@@ -27,9 +28,20 @@ class EmploymentTypeState: ObservableObject {
 	}
 }
 
+class FieldState: ObservableObject {
+	let name: String
+	@Published var isEnabled: Bool
+
+	init(name: String, isEnabled: Bool) {
+		self.name = name
+		self.isEnabled = isEnabled
+	}
+}
+
 class FiltersViewModel: FiltersViewModelProtocol, ObservableObject {
 	@Published var locations = [LocationState]()
 	@Published var employmentTypes = [EmploymentTypeState]()
+	@Published var fields = [FieldState]()
 	@Published var jobs = [Job]()
 
 	private var cancellables = Set<AnyCancellable>()
@@ -47,6 +59,13 @@ class FiltersViewModel: FiltersViewModelProtocol, ObservableObject {
 				.map { EmploymentTypeState(name: $0, isEnabled: false) }
 		}
 		.assign(to: \.employmentTypes, on: self)
+		.store(in: &cancellables)
+
+		$jobs.map {
+			Self.getUniques(\.field, from: $0)
+				.map { FieldState(name: $0, isEnabled: false) }
+		}
+		.assign(to: \.fields, on: self)
 		.store(in: &cancellables)
 	}
 
