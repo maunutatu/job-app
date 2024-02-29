@@ -99,6 +99,22 @@
         }
       }
     },
+    "job.noResults" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No results 😟"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ei hakutuloksia 😟"
+          }
+        }
+      }
+    },
     "job.postedAt" : {
       "extractionState" : "manual",
       "localizations" : {

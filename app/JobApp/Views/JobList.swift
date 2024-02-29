@@ -47,23 +47,34 @@ struct JobList<ViewModel: JobsViewModelProtocol>: View {
 
 	@ViewBuilder
 	private func sidebar(with jobs: [Job]) -> some View {
-		List(jobs, id: \.id, selection: $selectedJob, rowContent: row)
-			.listStyle(.plain)
-			.animation(.default, value: jobs)
-			.searchable(text: $viewModel.searchText)
-			.toolbar {
-				Button {
-					filtersShown = true
-				} label: {
-					Image(systemName: "line.3.horizontal.decrease.circle")
-				}
-				.popover(isPresented: $filtersShown) {
-					ScrollView {
-						FiltersView(viewModel: viewModel.filtersViewModel)
-					}
-					.scrollBounceBehavior(.basedOnSize)
-				}
+		VStack {
+			jobList(for: jobs)
+		}
+		.toolbar {
+			Button {
+				filtersShown = true
+			} label: {
+				Image(systemName: "line.3.horizontal.decrease.circle")
 			}
+			.popover(isPresented: $filtersShown) {
+				ScrollView {
+					FiltersView(viewModel: viewModel.filtersViewModel)
+				}
+				.scrollBounceBehavior(.basedOnSize)
+			}
+		}
+	}
+
+	@ViewBuilder
+	private func jobList(for jobs: [Job]) -> some View {
+		if jobs.isEmpty {
+			NoResultsView()
+		} else {
+			List(jobs, id: \.id, selection: $selectedJob, rowContent: row)
+				.listStyle(.plain)
+				.animation(.default, value: jobs)
+				.searchable(text: $viewModel.searchText)
+		}
 	}
 
 	@ViewBuilder
