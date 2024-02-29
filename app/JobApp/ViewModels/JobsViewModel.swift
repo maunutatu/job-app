@@ -17,7 +17,7 @@ enum JobsViewState {
 }
 
 class JobsViewModel: JobsViewModelProtocol, ObservableObject {
-	let filtersViewModel = FiltersViewModel()
+	@ObservedObject var filtersViewModel = FiltersViewModel()
 
 	@Published var state = JobsViewState.loading
 	@Published var searchText = ""
@@ -31,8 +31,9 @@ class JobsViewModel: JobsViewModelProtocol, ObservableObject {
 		self.jobService = jobService
 
 		rawState
-			.combineLatest($searchText, filtersViewModel.$locations, filtersViewModel.$employmentTypes)
-			.map(filteredState)
+			.combineLatest($searchText)
+			.combineLatest(filtersViewModel.$locations, filtersViewModel.$employmentTypes, filtersViewModel.$fields)
+			.map { Self.filteredState($0.0.0, searchText: $0.0.1, locations: $0.1, employmentTypes: $0.2, fields: $0.3) }
 			.assign(to: \.state, on: self)
 			.store(in: &cancellables)
 
@@ -47,24 +48,27 @@ class JobsViewModel: JobsViewModelProtocol, ObservableObject {
 		}
 	}
 
-	private func filteredState(
+	private static func filteredState(
 		_ state: JobsViewState,
 		searchText: String,
 		locations: [LocationState],
-		employmentTypes: [EmploymentTypeState]
+		employmentTypes: [EmploymentTypeState],
+		fields: [FieldState]
 	) -> JobsViewState {
 		guard case .success(let jobs) = state else { return state }
 
 		let filteredJobs = jobs.filter {
 			let content = [$0.title, $0.description, $0.company, $0.employmentType]
-			let enabledLocations = filtersViewModel.locations.filter(\.isEnabled).map(\.name)
-			let enabledEmploymentTypes = filtersViewModel.employmentTypes.filter(\.isEnabled).map(\.name)
+			let enabledLocations = locations.filter(\.isEnabled).map(\.name)
+			let enabledEmploymentTypes = employmentTypes.filter(\.isEnabled).map(\.name)
+			let enabledFields = fields.filter(\.isEnabled).map(\.name)
 
 			let contentMatches = searchText.isEmpty || content.contains { $0.contains(searchText) }
 			let locationMatches = enabledLocations.isEmpty || enabledLocations.contains($0.location)
 			let employmentTypeMatches = enabledEmploymentTypes.isEmpty || enabledEmploymentTypes.contains($0.employmentType)
+			let fieldMatches = enabledFields.isEmpty || enabledFields.contains($0.field)
 
-			return contentMatches && locationMatches && employmentTypeMatches
+			return contentMatches && locationMatches && employmentTypeMatches && fieldMatches
 		}
 
 		return .success(jobs: filteredJobs)

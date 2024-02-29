@@ -58,8 +58,10 @@ struct JobList<ViewModel: JobsViewModelProtocol>: View {
 					Image(systemName: "line.3.horizontal.decrease.circle")
 				}
 				.popover(isPresented: $filtersShown) {
-					FiltersView(viewModel: viewModel.filtersViewModel)
-						.presentationDetents([.medium])
+					ScrollView {
+						FiltersView(viewModel: viewModel.filtersViewModel)
+					}
+					.scrollBounceBehavior(.basedOnSize)
 				}
 			}
 	}
