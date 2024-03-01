@@ -50,6 +50,7 @@ struct JobList<ViewModel: JobsViewModelProtocol>: View {
 		VStack {
 			jobList(for: jobs)
 		}
+		.searchable(text: $viewModel.searchText)
 		.toolbar {
 			Button {
 				filtersShown = true
@@ -73,7 +74,6 @@ struct JobList<ViewModel: JobsViewModelProtocol>: View {
 			List(jobs, id: \.id, selection: $selectedJob, rowContent: row)
 				.listStyle(.plain)
 				.animation(.default, value: jobs)
-				.searchable(text: $viewModel.searchText)
 		}
 	}
 
