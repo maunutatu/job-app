@@ -11,24 +11,65 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 )
 
+const createUser = `-- name: CreateUser :one
+INSERT INTO "user" (first_name, last_name, phone_number, email, date_of_birth, experience, education, skills)
+VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+RETURNING id, first_name, last_name, phone_number, email, date_of_birth, experience, education, skills
+`
+
+type CreateUserParams struct {
+	FirstName   string
+	LastName    string
+	PhoneNumber string
+	Email       string
+	DateOfBirth pgtype.Date
+	Experience  string
+	Education   string
+	Skills      []string
+}
+
+func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, error) {
+	row := q.db.QueryRow(ctx, createUser,
+		arg.FirstName,
+		arg.LastName,
+		arg.PhoneNumber,
+		arg.Email,
+		arg.DateOfBirth,
+		arg.Experience,
+		arg.Education,
+		arg.Skills,
+	)
+	var i User
+	err := row.Scan(
+		&i.ID,
+		&i.FirstName,
+		&i.LastName,
+		&i.PhoneNumber,
+		&i.Email,
+		&i.DateOfBirth,
+		&i.Experience,
+		&i.Education,
+		&i.Skills,
+	)
+	return i, err
+}
+
 const getJobListings = `-- name: GetJobListings :many
-SELECT
-    jl.id,
-    jl.title,
-    jl.description,
-    jl.salary,
-    c.name AS company,
-    jl.date_posted,
-    jl.start_date,
-    jl.end_date,
-    jl.location,
-    jl.field,
-    jl.working_hours,
-    jl.employment_type
-FROM
-    job_listing jl
-        JOIN
-    company c ON jl.company = c.id
+SELECT jl.id,
+       jl.title,
+       jl.description,
+       jl.salary,
+       c.name AS company,
+       jl.date_posted,
+       jl.start_date,
+       jl.end_date,
+       jl.location,
+       jl.field,
+       jl.working_hours,
+       jl.employment_type
+FROM job_listing jl
+         JOIN
+     company c ON jl.company = c.id
 `
 
 type GetJobListingsRow struct {
@@ -77,4 +118,217 @@ func (q *Queries) GetJobListings(ctx context.Context) ([]GetJobListingsRow, erro
 		return nil, err
 	}
 	return items, nil
+}
+
+const getUser = `-- name: GetUser :one
+SELECT u.id,
+       u.first_name,
+       u.last_name,
+       u.phone_number,
+       u.email,
+       u.date_of_birth,
+       u.experience,
+       u.education,
+       u.skills
+FROM "user" u
+WHERE u.id = $1
+`
+
+func (q *Queries) GetUser(ctx context.Context, id int32) (User, error) {
+	row := q.db.QueryRow(ctx, getUser, id)
+	var i User
+	err := row.Scan(
+		&i.ID,
+		&i.FirstName,
+		&i.LastName,
+		&i.PhoneNumber,
+		&i.Email,
+		&i.DateOfBirth,
+		&i.Experience,
+		&i.Education,
+		&i.Skills,
+	)
+	return i, err
+}
+
+const getUserFavoriteJobListings = `-- name: GetUserFavoriteJobListings :many
+SELECT jl.id,
+       jl.title,
+       jl.description,
+       jl.salary,
+       c.name AS company,
+       jl.date_posted,
+       jl.start_date,
+       jl.end_date,
+       jl.location,
+       jl.field,
+       jl.working_hours,
+       jl.employment_type
+FROM user_favorite_job_listing ufl
+         JOIN
+     job_listing jl ON jl.id = ufl.job_listing
+         JOIN
+     company c ON jl.company = c.id
+WHERE ufl."user" = $1
+`
+
+type GetUserFavoriteJobListingsRow struct {
+	ID             int32
+	Title          string
+	Description    string
+	Salary         pgtype.Numeric
+	Company        string
+	DatePosted     pgtype.Date
+	StartDate      pgtype.Date
+	EndDate        pgtype.Date
+	Location       string
+	Field          string
+	WorkingHours   string
+	EmploymentType string
+}
+
+func (q *Queries) GetUserFavoriteJobListings(ctx context.Context, user int32) ([]GetUserFavoriteJobListingsRow, error) {
+	rows, err := q.db.Query(ctx, getUserFavoriteJobListings, user)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []GetUserFavoriteJobListingsRow
+	for rows.Next() {
+		var i GetUserFavoriteJobListingsRow
+		if err := rows.Scan(
+			&i.ID,
+			&i.Title,
+			&i.Description,
+			&i.Salary,
+			&i.Company,
+			&i.DatePosted,
+			&i.StartDate,
+			&i.EndDate,
+			&i.Location,
+			&i.Field,
+			&i.WorkingHours,
+			&i.EmploymentType,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const getUserJobApplications = `-- name: GetUserJobApplications :many
+SELECT ja.id,
+       ja."user",
+       ja.job_listing,
+       ja.cover_letter,
+       ja.status,
+       ja.sent_date,
+       ja.relevant_skills,
+       jl.title AS job_title,
+       c.name   AS company
+FROM job_application ja
+         JOIN
+     job_listing jl ON ja.job_listing = jl.id
+         JOIN
+     company c ON jl.company = c.id
+WHERE ja.user = $1
+`
+
+type GetUserJobApplicationsRow struct {
+	ID             int32
+	User           int32
+	JobListing     int32
+	CoverLetter    pgtype.Text
+	Status         string
+	SentDate       pgtype.Date
+	RelevantSkills string
+	JobTitle       string
+	Company        string
+}
+
+func (q *Queries) GetUserJobApplications(ctx context.Context, user int32) ([]GetUserJobApplicationsRow, error) {
+	rows, err := q.db.Query(ctx, getUserJobApplications, user)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []GetUserJobApplicationsRow
+	for rows.Next() {
+		var i GetUserJobApplicationsRow
+		if err := rows.Scan(
+			&i.ID,
+			&i.User,
+			&i.JobListing,
+			&i.CoverLetter,
+			&i.Status,
+			&i.SentDate,
+			&i.RelevantSkills,
+			&i.JobTitle,
+			&i.Company,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const updateUser = `-- name: UpdateUser :one
+UPDATE "user"
+SET first_name    = $2,
+    last_name     = $3,
+    phone_number  = $4,
+    email         = $5,
+    date_of_birth = $6,
+    experience    = $7,
+    education     = $8,
+    skills        = $9
+WHERE id = $1
+RETURNING id, first_name, last_name, phone_number, email, date_of_birth, experience, education, skills
+`
+
+type UpdateUserParams struct {
+	ID          int32
+	FirstName   string
+	LastName    string
+	PhoneNumber string
+	Email       string
+	DateOfBirth pgtype.Date
+	Experience  string
+	Education   string
+	Skills      []string
+}
+
+func (q *Queries) UpdateUser(ctx context.Context, arg UpdateUserParams) (User, error) {
+	row := q.db.QueryRow(ctx, updateUser,
+		arg.ID,
+		arg.FirstName,
+		arg.LastName,
+		arg.PhoneNumber,
+		arg.Email,
+		arg.DateOfBirth,
+		arg.Experience,
+		arg.Education,
+		arg.Skills,
+	)
+	var i User
+	err := row.Scan(
+		&i.ID,
+		&i.FirstName,
+		&i.LastName,
+		&i.PhoneNumber,
+		&i.Email,
+		&i.DateOfBirth,
+		&i.Experience,
+		&i.Education,
+		&i.Skills,
+	)
+	return i, err
 }
