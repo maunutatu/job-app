@@ -21,8 +21,9 @@ class JobService<Networking: HttpNetworking>: JobServiceProtocol {
 	func jobs() async throws -> [Job] {
 		try decoder.decode([Job].self, from: await networking.perform(
 			method: .get,
+			scheme: "http",
 			host: host,
-			path: "/jobListings",
+			path: "/job-listings",
 			payload: nil
 		))
 	}
