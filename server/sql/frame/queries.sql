@@ -82,3 +82,35 @@ SET first_name    = $2,
     skills        = $9
 WHERE id = $1
 RETURNING *;
+
+-- name: GetJobApplication :one
+SELECT ja.id,
+       ja."user",
+       ja.job_listing,
+       ja.cover_letter,
+       ja.status,
+       ja.sent_date,
+       ja.relevant_skills
+FROM job_application ja
+WHERE ja."user" = $1
+  AND ja.job_listing = $2;
+
+-- name: CreateJobApplication :one
+INSERT INTO job_application ("user", job_listing, cover_letter, status, sent_date, relevant_skills)
+VALUES ($1, $2, $3, $4, $5, $6)
+RETURNING *;
+
+-- name: UpdateJobApplication :one
+UPDATE job_application
+SET cover_letter     = $3,
+    status           = $4,
+    sent_date        = $5,
+    relevant_skills  = $6
+WHERE "user" = $1
+  AND job_listing = $2
+RETURNING *;
+
+-- name: DeleteJobApplication :exec
+DELETE FROM job_application
+WHERE "user" = $1
+  AND job_listing = $2;

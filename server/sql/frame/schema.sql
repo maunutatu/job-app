@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS job_application (
     cover_letter TEXT,
     status TEXT NOT NULL,
     sent_date DATE,
-    relevant_skills TEXT NOT NULL
+    relevant_skills TEXT[]
     );
 
 CREATE TABLE IF NOT EXISTS user_favorite_job_listing (

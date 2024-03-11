@@ -11,6 +11,43 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 )
 
+const createJobApplication = `-- name: CreateJobApplication :one
+INSERT INTO job_application ("user", job_listing, cover_letter, status, sent_date, relevant_skills)
+VALUES ($1, $2, $3, $4, $5, $6)
+RETURNING id, "user", job_listing, cover_letter, status, sent_date, relevant_skills
+`
+
+type CreateJobApplicationParams struct {
+	User           int32
+	JobListing     int32
+	CoverLetter    pgtype.Text
+	Status         string
+	SentDate       pgtype.Date
+	RelevantSkills []string
+}
+
+func (q *Queries) CreateJobApplication(ctx context.Context, arg CreateJobApplicationParams) (JobApplication, error) {
+	row := q.db.QueryRow(ctx, createJobApplication,
+		arg.User,
+		arg.JobListing,
+		arg.CoverLetter,
+		arg.Status,
+		arg.SentDate,
+		arg.RelevantSkills,
+	)
+	var i JobApplication
+	err := row.Scan(
+		&i.ID,
+		&i.User,
+		&i.JobListing,
+		&i.CoverLetter,
+		&i.Status,
+		&i.SentDate,
+		&i.RelevantSkills,
+	)
+	return i, err
+}
+
 const createUser = `-- name: CreateUser :one
 INSERT INTO "user" (first_name, last_name, phone_number, email, date_of_birth, experience, education, skills)
 VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
@@ -50,6 +87,55 @@ func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, e
 		&i.Experience,
 		&i.Education,
 		&i.Skills,
+	)
+	return i, err
+}
+
+const deleteJobApplication = `-- name: DeleteJobApplication :exec
+DELETE FROM job_application
+WHERE "user" = $1
+  AND job_listing = $2
+`
+
+type DeleteJobApplicationParams struct {
+	User       int32
+	JobListing int32
+}
+
+func (q *Queries) DeleteJobApplication(ctx context.Context, arg DeleteJobApplicationParams) error {
+	_, err := q.db.Exec(ctx, deleteJobApplication, arg.User, arg.JobListing)
+	return err
+}
+
+const getJobApplication = `-- name: GetJobApplication :one
+SELECT ja.id,
+       ja."user",
+       ja.job_listing,
+       ja.cover_letter,
+       ja.status,
+       ja.sent_date,
+       ja.relevant_skills
+FROM job_application ja
+WHERE ja."user" = $1
+  AND ja.job_listing = $2
+`
+
+type GetJobApplicationParams struct {
+	User       int32
+	JobListing int32
+}
+
+func (q *Queries) GetJobApplication(ctx context.Context, arg GetJobApplicationParams) (JobApplication, error) {
+	row := q.db.QueryRow(ctx, getJobApplication, arg.User, arg.JobListing)
+	var i JobApplication
+	err := row.Scan(
+		&i.ID,
+		&i.User,
+		&i.JobListing,
+		&i.CoverLetter,
+		&i.Status,
+		&i.SentDate,
+		&i.RelevantSkills,
 	)
 	return i, err
 }
@@ -245,7 +331,7 @@ type GetUserJobApplicationsRow struct {
 	CoverLetter    pgtype.Text
 	Status         string
 	SentDate       pgtype.Date
-	RelevantSkills string
+	RelevantSkills []string
 	JobTitle       string
 	Company        string
 }
@@ -278,6 +364,48 @@ func (q *Queries) GetUserJobApplications(ctx context.Context, user int32) ([]Get
 		return nil, err
 	}
 	return items, nil
+}
+
+const updateJobApplication = `-- name: UpdateJobApplication :one
+UPDATE job_application
+SET cover_letter     = $3,
+    status           = $4,
+    sent_date        = $5,
+    relevant_skills  = $6
+WHERE "user" = $1
+  AND job_listing = $2
+RETURNING id, "user", job_listing, cover_letter, status, sent_date, relevant_skills
+`
+
+type UpdateJobApplicationParams struct {
+	User           int32
+	JobListing     int32
+	CoverLetter    pgtype.Text
+	Status         string
+	SentDate       pgtype.Date
+	RelevantSkills []string
+}
+
+func (q *Queries) UpdateJobApplication(ctx context.Context, arg UpdateJobApplicationParams) (JobApplication, error) {
+	row := q.db.QueryRow(ctx, updateJobApplication,
+		arg.User,
+		arg.JobListing,
+		arg.CoverLetter,
+		arg.Status,
+		arg.SentDate,
+		arg.RelevantSkills,
+	)
+	var i JobApplication
+	err := row.Scan(
+		&i.ID,
+		&i.User,
+		&i.JobListing,
+		&i.CoverLetter,
+		&i.Status,
+		&i.SentDate,
+		&i.RelevantSkills,
+	)
+	return i, err
 }
 
 const updateUser = `-- name: UpdateUser :one

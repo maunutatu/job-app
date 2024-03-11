@@ -24,7 +24,7 @@ type JobApplication struct {
 	CoverLetter    pgtype.Text
 	Status         string
 	SentDate       pgtype.Date
-	RelevantSkills string
+	RelevantSkills []string
 }
 
 type JobListing struct {
