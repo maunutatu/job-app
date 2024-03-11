@@ -11,6 +11,21 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 )
 
+const addUserFavoriteJobListing = `-- name: AddUserFavoriteJobListing :exec
+INSERT INTO user_favorite_job_listing ("user", job_listing)
+VALUES ($1, $2)
+`
+
+type AddUserFavoriteJobListingParams struct {
+	User       int32
+	JobListing int32
+}
+
+func (q *Queries) AddUserFavoriteJobListing(ctx context.Context, arg AddUserFavoriteJobListingParams) error {
+	_, err := q.db.Exec(ctx, addUserFavoriteJobListing, arg.User, arg.JobListing)
+	return err
+}
+
 const createJobApplication = `-- name: CreateJobApplication :one
 INSERT INTO job_application ("user", job_listing, cover_letter, status, sent_date, relevant_skills)
 VALUES ($1, $2, $3, $4, $5, $6)
@@ -364,6 +379,22 @@ func (q *Queries) GetUserJobApplications(ctx context.Context, user int32) ([]Get
 		return nil, err
 	}
 	return items, nil
+}
+
+const removeUserFavoriteJobListing = `-- name: RemoveUserFavoriteJobListing :exec
+DELETE FROM user_favorite_job_listing
+WHERE "user" = $1
+  AND job_listing = $2
+`
+
+type RemoveUserFavoriteJobListingParams struct {
+	User       int32
+	JobListing int32
+}
+
+func (q *Queries) RemoveUserFavoriteJobListing(ctx context.Context, arg RemoveUserFavoriteJobListingParams) error {
+	_, err := q.db.Exec(ctx, removeUserFavoriteJobListing, arg.User, arg.JobListing)
+	return err
 }
 
 const updateJobApplication = `-- name: UpdateJobApplication :one

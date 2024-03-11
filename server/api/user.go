@@ -10,7 +10,7 @@ import (
 type GetUserResponse struct {
 	database.User
 	JobApplications     []database.GetUserJobApplicationsRow
-	favoriteJobListings []database.GetUserFavoriteJobListingsRow
+	FavoriteJobListings []database.GetUserFavoriteJobListingsRow
 }
 
 func (s *Service) GetUser(c *gin.Context) {

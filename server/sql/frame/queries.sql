@@ -114,3 +114,12 @@ RETURNING *;
 DELETE FROM job_application
 WHERE "user" = $1
   AND job_listing = $2;
+
+-- name: AddUserFavoriteJobListing :exec
+INSERT INTO user_favorite_job_listing ("user", job_listing)
+VALUES ($1, $2);
+
+-- name: RemoveUserFavoriteJobListing :exec
+DELETE FROM user_favorite_job_listing
+WHERE "user" = $1
+  AND job_listing = $2;

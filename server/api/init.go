@@ -14,12 +14,14 @@ func NewService(queries *database.Queries) *Service {
 }
 
 func (s *Service) RegisterHandlers(router *gin.Engine) {
-	router.GET("/jobListings", s.GetJobListings)
-	router.GET("/user/:userID", s.GetUser)
-	router.POST("/user", s.CreateUser)
-	router.PUT("/user", s.UpdateUser)
-	router.GET("/jobApplication", s.GetJobApplication)
-	router.POST("/jobApplication", s.CreateJobApplication)
-	router.PUT("/jobApplication", s.UpdateJobApplication)
-	router.DELETE("/jobApplication", s.DeleteJobApplication)
+	router.GET("/job-listings", s.GetJobListings)
+	router.GET("/users/:userID", s.GetUser)
+	router.POST("/users", s.CreateUser)
+	router.PUT("/users", s.UpdateUser)
+	router.GET("/job-application", s.GetJobApplication)
+	router.POST("/job-application", s.CreateJobApplication)
+	router.PUT("/job-application", s.UpdateJobApplication)
+	router.DELETE("/job-application", s.DeleteJobApplication)
+	router.POST("/user/favorites", s.AddUserFavoriteJobListing)
+	router.DELETE("/user/favorites", s.RemoveUserFavoriteJobListing)
 }
