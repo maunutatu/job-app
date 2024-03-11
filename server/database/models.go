@@ -17,6 +17,16 @@ type Company struct {
 	PhoneNumber string
 }
 
+type JobApplication struct {
+	ID             int32
+	User           int32
+	JobListing     int32
+	CoverLetter    pgtype.Text
+	Status         string
+	SentDate       pgtype.Date
+	RelevantSkills []string
+}
+
 type JobListing struct {
 	ID             int32
 	Title          string
@@ -30,4 +40,22 @@ type JobListing struct {
 	Field          string
 	WorkingHours   string
 	EmploymentType string
+}
+
+type User struct {
+	ID          int32
+	FirstName   string
+	LastName    string
+	PhoneNumber string
+	Email       string
+	DateOfBirth pgtype.Date
+	Experience  string
+	Education   string
+	Skills      []string
+}
+
+type UserFavoriteJobListing struct {
+	ID         int32
+	User       int32
+	JobListing int32
 }

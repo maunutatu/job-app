@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jackc/pgx/v5"
 	"os"
-	jobListingApi "server/api"
+	"server/api"
 	"server/database"
 )
 
@@ -35,8 +35,8 @@ func main() {
 
 	router := gin.Default()
 
-	jobListingService := jobListingApi.NewService(queries)
-	jobListingService.RegisterHandlers(router)
+	apiService := api.NewService(queries)
+	apiService.RegisterHandlers(router)
 
 	router.Run()
 }
