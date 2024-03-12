@@ -19,7 +19,8 @@ CREATE TABLE IF NOT EXISTS job_listing (
     location TEXT NOT NULL,
     field TEXT NOT NULL,
     working_hours TEXT NOT NULL,
-    employment_type TEXT NOT NULL
+    employment_type TEXT NOT NULL,
+    schedule TEXT NOT NULL
     );
 
 CREATE TABLE IF NOT EXISTS "user" (

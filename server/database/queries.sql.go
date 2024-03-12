@@ -107,7 +107,8 @@ func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, e
 }
 
 const deleteJobApplication = `-- name: DeleteJobApplication :exec
-DELETE FROM job_application
+DELETE
+FROM job_application
 WHERE "user" = $1
   AND job_listing = $2
 `
@@ -167,7 +168,8 @@ SELECT jl.id,
        jl.location,
        jl.field,
        jl.working_hours,
-       jl.employment_type
+       jl.employment_type,
+       jl.schedule
 FROM job_listing jl
          JOIN
      company c ON jl.company = c.id
@@ -186,6 +188,7 @@ type GetJobListingsRow struct {
 	Field          string
 	WorkingHours   string
 	EmploymentType string
+	Schedule       string
 }
 
 func (q *Queries) GetJobListings(ctx context.Context) ([]GetJobListingsRow, error) {
@@ -210,6 +213,7 @@ func (q *Queries) GetJobListings(ctx context.Context) ([]GetJobListingsRow, erro
 			&i.Field,
 			&i.WorkingHours,
 			&i.EmploymentType,
+			&i.Schedule,
 		); err != nil {
 			return nil, err
 		}
@@ -382,7 +386,8 @@ func (q *Queries) GetUserJobApplications(ctx context.Context, user int32) ([]Get
 }
 
 const removeUserFavoriteJobListing = `-- name: RemoveUserFavoriteJobListing :exec
-DELETE FROM user_favorite_job_listing
+DELETE
+FROM user_favorite_job_listing
 WHERE "user" = $1
   AND job_listing = $2
 `
@@ -399,10 +404,10 @@ func (q *Queries) RemoveUserFavoriteJobListing(ctx context.Context, arg RemoveUs
 
 const updateJobApplication = `-- name: UpdateJobApplication :one
 UPDATE job_application
-SET cover_letter     = $3,
-    status           = $4,
-    sent_date        = $5,
-    relevant_skills  = $6
+SET cover_letter    = $3,
+    status          = $4,
+    sent_date       = $5,
+    relevant_skills = $6
 WHERE "user" = $1
   AND job_listing = $2
 RETURNING id, "user", job_listing, cover_letter, status, sent_date, relevant_skills

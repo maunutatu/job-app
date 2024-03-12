@@ -10,7 +10,8 @@ SELECT jl.id,
        jl.location,
        jl.field,
        jl.working_hours,
-       jl.employment_type
+       jl.employment_type,
+       jl.schedule
 FROM job_listing jl
          JOIN
      company c ON jl.company = c.id;
@@ -102,16 +103,17 @@ RETURNING *;
 
 -- name: UpdateJobApplication :one
 UPDATE job_application
-SET cover_letter     = $3,
-    status           = $4,
-    sent_date        = $5,
-    relevant_skills  = $6
+SET cover_letter    = $3,
+    status          = $4,
+    sent_date       = $5,
+    relevant_skills = $6
 WHERE "user" = $1
   AND job_listing = $2
 RETURNING *;
 
 -- name: DeleteJobApplication :exec
-DELETE FROM job_application
+DELETE
+FROM job_application
 WHERE "user" = $1
   AND job_listing = $2;
 
@@ -120,6 +122,7 @@ INSERT INTO user_favorite_job_listing ("user", job_listing)
 VALUES ($1, $2);
 
 -- name: RemoveUserFavoriteJobListing :exec
-DELETE FROM user_favorite_job_listing
+DELETE
+FROM user_favorite_job_listing
 WHERE "user" = $1
   AND job_listing = $2;
