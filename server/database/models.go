@@ -40,6 +40,7 @@ type JobListing struct {
 	Field          string
 	WorkingHours   string
 	EmploymentType string
+	Schedule       string
 }
 
 type User struct {
