@@ -8,6 +8,7 @@ protocol JobsViewModelProtocol: ObservableObject {
 	var filtersViewModel: SomeFiltersViewModel { get }
 	var state: JobsViewState { get }
 	var searchText: String { get set }
+	var activeFilterCount: Int { get }
 }
 
 enum JobsViewState {
@@ -21,6 +22,7 @@ class JobsViewModel: JobsViewModelProtocol, ObservableObject {
 
 	@Published var state = JobsViewState.loading
 	@Published var searchText = ""
+	@Published var activeFilterCount = 0
 
 	private var rawState = PassthroughSubject<JobsViewState, Never>()
 	private let jobService: JobServiceProtocol
@@ -37,6 +39,10 @@ class JobsViewModel: JobsViewModelProtocol, ObservableObject {
 			.assign(to: \.state, on: self)
 			.store(in: &cancellables)
 
+		filtersViewModel.$activeFilterCount
+			.assign(to: \.activeFilterCount, on: self)
+			.store(in: &cancellables)
+
 		Task {
 			do {
 				jobs = try await jobService.jobs()
@@ -51,9 +57,9 @@ class JobsViewModel: JobsViewModelProtocol, ObservableObject {
 	private static func filteredState(
 		_ state: JobsViewState,
 		searchText: String,
-		locations: [LocationState],
-		employmentTypes: [EmploymentTypeState],
-		fields: [FieldState]
+		locations: [FilterState],
+		employmentTypes: [FilterState],
+		fields: [FilterState]
 	) -> JobsViewState {
 		guard case .success(let jobs) = state else { return state }
 
@@ -79,4 +85,5 @@ class JobsViewModelPreview: JobsViewModelProtocol {
 	let filtersViewModel = FiltersViewModel()
 	let state = JobsViewState.success(jobs: PreviewData.sampleJobs)
 	var searchText = ""
+	let activeFilterCount = 0
 }

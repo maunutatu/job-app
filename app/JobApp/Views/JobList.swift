@@ -55,7 +55,7 @@ struct JobList<ViewModel: JobsViewModelProtocol>: View {
 			Button {
 				filtersShown = true
 			} label: {
-				Image(systemName: "line.3.horizontal.decrease.circle")
+				Text(filterButtonTitle).bold()
 			}
 			.popover(isPresented: $filtersShown) {
 				ScrollView {
@@ -86,6 +86,12 @@ struct JobList<ViewModel: JobsViewModelProtocol>: View {
 		} else {
 			Text("job.noneSelected")
 		}
+	}
+
+	private var filterButtonTitle: String {
+		let title = String(localized: "job.filterButton")
+		let activeFilterCount = viewModel.activeFilterCount
+		return title + (activeFilterCount > 0 ? " (\(activeFilterCount))" : "")
 	}
 }
 
