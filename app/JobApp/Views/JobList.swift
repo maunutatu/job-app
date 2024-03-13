@@ -102,7 +102,7 @@ struct JobList<ViewModel: JobsViewModelProtocol>: View {
 	private var detail: some View {
 		if let selectedJob {
 			NavigationStack {
-				JobView(job: selectedJob)
+				JobView(viewModel: viewModel.jobViewModel(for: selectedJob))
 			}
 		} else {
 			Text("job.noneSelected")

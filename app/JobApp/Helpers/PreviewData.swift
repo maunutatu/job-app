@@ -1,5 +1,6 @@
 enum PreviewData {
 	private static let jobService = SampleJobService()
+	private static let userService = SampleUserService()
 
 	static let sampleJobs = {
 		do {
@@ -14,5 +15,12 @@ enum PreviewData {
 			fatalError("No jobs in sample list")
 		}
 		return job
+	}()
+
+	static let sampleUser = {
+		guard let user = try? userService.getUser(withId: 1) else {
+			fatalError("No user in sample list")
+		}
+		return user
 	}()
 }

@@ -1,4 +1,4 @@
-import Foundation
+import SwiftUI
 import Networking
 
 @MainActor
@@ -25,17 +25,23 @@ enum UserViewSaveButtonState {
 	case error(message: String)
 }
 
-class UserViewModel<ConfigurationService: ConfigurationServiceProtocol, UserService: UserServiceProtocol>: UserViewModelProtocol {
+class UserViewModel<
+	SessionManager: SessionManagerProtocol,
+	ConfigurationService: ConfigurationServiceProtocol,
+	UserService: UserServiceProtocol
+>: UserViewModelProtocol {
 	@Published var userId: User.ID?
 	@Published var state = UserViewState.loading
 	@Published var saveButtonState = UserViewSaveButtonState.ready
 	@Published var presentedError: LocalizedAlertError?
 
+	private let sessionManager: SessionManager
 	private let configurationService: ConfigurationService
 	private let userService: UserService
 
-	init(configurationService: ConfigurationService, userService: UserService) {
+	init(sessionManager: SessionManager, configurationService: ConfigurationService, userService: UserService) {
 		self.userId = configurationService.get(Configuration.currentUserId)
+		self.sessionManager = sessionManager
 		self.configurationService = configurationService
 		self.userService = userService
 
@@ -89,6 +95,7 @@ class UserViewModel<ConfigurationService: ConfigurationServiceProtocol, UserServ
 		userId = user?.id
 		configurationService.set(user?.id, for: Configuration.currentUserId)
 		state = .ready(user.map(UserTemplate.init) ?? UserTemplate())
+		sessionManager.user = user
 	}
 }
 

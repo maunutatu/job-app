@@ -201,6 +201,22 @@
         }
       }
     },
+    "job.alreadyApplied" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You have applied for this job ✅"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Olet lähettänyt hakemuksen tähän työpaikkaan ✅"
+          }
+        }
+      }
+    },
     "job.applyButton" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -214,6 +230,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lähetä hakemus"
+          }
+        }
+      }
+    },
+    "job.coverLetter" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cover letter:"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saatekirje:"
           }
         }
       }
@@ -267,6 +299,38 @@
         }
       }
     },
+    "job.noSkillsForUser" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No skills listed in your profile"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profiilissasi ei ole taitoja"
+          }
+        }
+      }
+    },
+    "job.notLoggedIn" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Log in to submit an application"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kirjaudu sisään lähettääksesi työhakemuksen"
+          }
+        }
+      }
+    },
     "job.postedAt" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -280,6 +344,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Julkaistu %@"
+          }
+        }
+      }
+    },
+    "job.relevantSkillsTitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Relevant skills:"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Soveltuvat taidot:"
           }
         }
       }

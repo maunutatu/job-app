@@ -10,6 +10,7 @@ struct User: Identifiable, Codable, Hashable {
 	let experience: String
 	let education: String
 	let skills: [String]
+	let jobApplications: [JobApplication]?
 
 	enum CodingKeys: String, CodingKey {
 		case id = "ID"
@@ -21,6 +22,7 @@ struct User: Identifiable, Codable, Hashable {
 		case experience = "Experience"
 		case education = "Education"
 		case skills = "Skills"
+		case jobApplications = "JobApplications"
 	}
 }
 
@@ -68,6 +70,7 @@ extension User {
 		experience = template.experience
 		education = template.education
 		skills = template.skills
+		jobApplications = []
 	}
 }
 
