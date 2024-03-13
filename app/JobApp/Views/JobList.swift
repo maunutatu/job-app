@@ -22,6 +22,22 @@ struct JobList<ViewModel: JobsViewModelProtocol>: View {
 
 	@ViewBuilder
 	func content(jobs: [Job]) -> some View {
+		TabView {
+			jobsTab(with: jobs)
+				.tabItem {
+					Image(systemName: "list.bullet.circle")
+					Text("tab.jobs")
+				}
+			userTab()
+				.tabItem {
+					Image(systemName: "person.crop.circle")
+					Text("tab.user")
+				}
+		}
+	}
+
+	@ViewBuilder
+	private func jobsTab(with jobs: [Job]) -> some View {
 		NavigationSplitView(
 			columnVisibility: .constant(.all),
 			sidebar: { sidebar(with: jobs) },
@@ -64,6 +80,11 @@ struct JobList<ViewModel: JobsViewModelProtocol>: View {
 				.scrollBounceBehavior(.basedOnSize)
 			}
 		}
+	}
+
+	@ViewBuilder
+	private func userTab() -> some View {
+		UserView(viewModel: viewModel.userViewModel)
 	}
 
 	@ViewBuilder

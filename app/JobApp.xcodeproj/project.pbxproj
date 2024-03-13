@@ -20,6 +20,15 @@
 		278E367A2B8E8F9900EAEC55 /* FiltersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278E36792B8E8F9900EAEC55 /* FiltersViewModel.swift */; };
 		27C829422B8D01DE00D622C6 /* JobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C829412B8D01DE00D622C6 /* JobView.swift */; };
 		27C829442B8DF35F00D622C6 /* JobApplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C829432B8DF35F00D622C6 /* JobApplicationView.swift */; };
+		27CA89AB2BA0DDCF009AAA9C /* HttpError+SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CA89AA2BA0DDCF009AAA9C /* HttpError+SampleData.swift */; };
+		27CA89AC2BA0E405009AAA9C /* SampleUsers.json in Resources */ = {isa = PBXBuildFile; fileRef = 27CA89A92BA0D952009AAA9C /* SampleUsers.json */; };
+		27CA89AE2BA0E59D009AAA9C /* ConfigurationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CA89AD2BA0E59D009AAA9C /* ConfigurationService.swift */; };
+		27CA89B02BA0F5CF009AAA9C /* LocalizedAlertError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CA89AF2BA0F5CF009AAA9C /* LocalizedAlertError.swift */; };
+		27CA89B82BA19007009AAA9C /* KeyboardTypeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CA89B72BA19007009AAA9C /* KeyboardTypeModifier.swift */; };
+		27CC1F3B2BA0BACF0004BDC8 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CC1F3A2BA0BACF0004BDC8 /* UserView.swift */; };
+		27CC1F3D2BA0C6A70004BDC8 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CC1F3C2BA0C6A70004BDC8 /* UserViewModel.swift */; };
+		27CC1F3F2BA0CA970004BDC8 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CC1F3E2BA0CA970004BDC8 /* UserService.swift */; };
+		27CC1F412BA0CC450004BDC8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CC1F402BA0CC450004BDC8 /* User.swift */; };
 		27D601D22B8BED44002CC59D /* JobsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D601D12B8BED44002CC59D /* JobsViewModel.swift */; };
 		27D601D42B8BEDDE002CC59D /* JobList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D601D32B8BEDDE002CC59D /* JobList.swift */; };
 		27D601D72B8BF114002CC59D /* JobListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D601D62B8BF114002CC59D /* JobListRow.swift */; };
@@ -42,6 +51,15 @@
 		278E36792B8E8F9900EAEC55 /* FiltersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewModel.swift; sourceTree = "<group>"; };
 		27C829412B8D01DE00D622C6 /* JobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobView.swift; sourceTree = "<group>"; };
 		27C829432B8DF35F00D622C6 /* JobApplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobApplicationView.swift; sourceTree = "<group>"; };
+		27CA89A92BA0D952009AAA9C /* SampleUsers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SampleUsers.json; sourceTree = "<group>"; };
+		27CA89AA2BA0DDCF009AAA9C /* HttpError+SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HttpError+SampleData.swift"; sourceTree = "<group>"; };
+		27CA89AD2BA0E59D009AAA9C /* ConfigurationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationService.swift; sourceTree = "<group>"; };
+		27CA89AF2BA0F5CF009AAA9C /* LocalizedAlertError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedAlertError.swift; sourceTree = "<group>"; };
+		27CA89B72BA19007009AAA9C /* KeyboardTypeModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardTypeModifier.swift; sourceTree = "<group>"; };
+		27CC1F3A2BA0BACF0004BDC8 /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
+		27CC1F3C2BA0C6A70004BDC8 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		27CC1F3E2BA0CA970004BDC8 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		27CC1F402BA0CC450004BDC8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		27D601D12B8BED44002CC59D /* JobsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsViewModel.swift; sourceTree = "<group>"; };
 		27D601D32B8BEDDE002CC59D /* JobList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobList.swift; sourceTree = "<group>"; };
 		27D601D52B8BEE89002CC59D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -103,6 +121,7 @@
 				27D601D52B8BEE89002CC59D /* Info.plist */,
 				2712043F2B81584E00F618DB /* JobApp.entitlements */,
 				2740DA2F2B8BD261001E2C4A /* SampleJobs.json */,
+				27CA89A92BA0D952009AAA9C /* SampleUsers.json */,
 				27418FC62B8BE2E1004E078E /* Icons.xcassets */,
 				275297E02B8C079300A8B612 /* Localizable.xcstrings */,
 			);
@@ -114,6 +133,9 @@
 			children = (
 				2740DA322B8BD61A001E2C4A /* Configure.swift */,
 				27D601D82B8BF190002CC59D /* PreviewData.swift */,
+				27CA89AA2BA0DDCF009AAA9C /* HttpError+SampleData.swift */,
+				27CA89AF2BA0F5CF009AAA9C /* LocalizedAlertError.swift */,
+				27CA89B72BA19007009AAA9C /* KeyboardTypeModifier.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -128,6 +150,7 @@
 				27C829412B8D01DE00D622C6 /* JobView.swift */,
 				27C829432B8DF35F00D622C6 /* JobApplicationView.swift */,
 				275297DE2B8BFF6F00A8B612 /* ErrorView.swift */,
+				27CC1F3A2BA0BACF0004BDC8 /* UserView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -136,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				27D601D12B8BED44002CC59D /* JobsViewModel.swift */,
+				27CC1F3C2BA0C6A70004BDC8 /* UserViewModel.swift */,
 				278E36792B8E8F9900EAEC55 /* FiltersViewModel.swift */,
 			);
 			path = ViewModels;
@@ -145,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				27EBC5B52B81905900F769B1 /* Job.swift */,
+				27CC1F402BA0CC450004BDC8 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -152,7 +177,9 @@
 		27EBC5BA2B8193FF00F769B1 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				27CC1F3E2BA0CA970004BDC8 /* UserService.swift */,
 				27EBC5AE2B818C8700F769B1 /* JobService.swift */,
+				27CA89AD2BA0E59D009AAA9C /* ConfigurationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -223,6 +250,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27CA89AC2BA0E405009AAA9C /* SampleUsers.json in Resources */,
 				27418FC72B8BE2E1004E078E /* Icons.xcassets in Resources */,
 				2740DA302B8BD261001E2C4A /* SampleJobs.json in Resources */,
 				275297E12B8C079300A8B612 /* Localizable.xcstrings in Resources */,
@@ -262,16 +290,24 @@
 				27D601D42B8BEDDE002CC59D /* JobList.swift in Sources */,
 				2712043A2B81584D00F618DB /* JobApp.swift in Sources */,
 				2740DA332B8BD61A001E2C4A /* Configure.swift in Sources */,
+				27CA89AB2BA0DDCF009AAA9C /* HttpError+SampleData.swift in Sources */,
 				278E36752B8E849300EAEC55 /* FiltersView.swift in Sources */,
 				27C829442B8DF35F00D622C6 /* JobApplicationView.swift in Sources */,
 				276BF9022B91251500A77A77 /* NoResultsView.swift in Sources */,
+				27CC1F3B2BA0BACF0004BDC8 /* UserView.swift in Sources */,
 				27C829422B8D01DE00D622C6 /* JobView.swift in Sources */,
+				27CA89AE2BA0E59D009AAA9C /* ConfigurationService.swift in Sources */,
+				27CC1F3D2BA0C6A70004BDC8 /* UserViewModel.swift in Sources */,
 				27EBC5B62B81905900F769B1 /* Job.swift in Sources */,
 				275297E22B8C0BF100A8B612 /* PreviewData.swift in Sources */,
 				27D601D72B8BF114002CC59D /* JobListRow.swift in Sources */,
 				275297DF2B8BFF6F00A8B612 /* ErrorView.swift in Sources */,
+				27CC1F412BA0CC450004BDC8 /* User.swift in Sources */,
 				278E367A2B8E8F9900EAEC55 /* FiltersViewModel.swift in Sources */,
+				27CA89B02BA0F5CF009AAA9C /* LocalizedAlertError.swift in Sources */,
+				27CC1F3F2BA0CA970004BDC8 /* UserService.swift in Sources */,
 				27EBC5AF2B818C8700F769B1 /* JobService.swift in Sources */,
+				27CA89B82BA19007009AAA9C /* KeyboardTypeModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

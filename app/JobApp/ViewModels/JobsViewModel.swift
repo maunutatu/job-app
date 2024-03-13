@@ -4,8 +4,10 @@ import Combine
 @MainActor
 protocol JobsViewModelProtocol: ObservableObject {
 	associatedtype SomeFiltersViewModel: FiltersViewModelProtocol
+	associatedtype SomeUserViewModel: UserViewModelProtocol
 
 	var filtersViewModel: SomeFiltersViewModel { get }
+	var userViewModel: SomeUserViewModel { get }
 	var state: JobsViewState { get }
 	var searchText: String { get set }
 	var activeFilterCount: Int { get }
@@ -17,8 +19,13 @@ enum JobsViewState {
 	case error(message: String)
 }
 
-class JobsViewModel: JobsViewModelProtocol, ObservableObject {
-	@ObservedObject var filtersViewModel = FiltersViewModel()
+class JobsViewModel<
+	ConfigurationService: ConfigurationServiceProtocol,
+	JobService: JobServiceProtocol,
+	UserService: UserServiceProtocol
+>: JobsViewModelProtocol, ObservableObject {
+	@ObservedObject var filtersViewModel: FiltersViewModel
+	@ObservedObject var userViewModel: UserViewModel<ConfigurationService, UserService>
 
 	@Published var state = JobsViewState.loading
 	@Published var searchText = ""
@@ -29,8 +36,10 @@ class JobsViewModel: JobsViewModelProtocol, ObservableObject {
 	private var jobs = [Job]()
 	private var cancellables = Set<AnyCancellable>()
 
-	init(jobService: JobServiceProtocol) {
+	init(configurationService: ConfigurationService, jobService: JobService, userService: UserService) {
 		self.jobService = jobService
+		self.filtersViewModel = FiltersViewModel()
+		self.userViewModel = UserViewModel(configurationService: configurationService, userService: userService)
 
 		rawState
 			.combineLatest($searchText)
@@ -83,6 +92,7 @@ class JobsViewModel: JobsViewModelProtocol, ObservableObject {
 
 class JobsViewModelPreview: JobsViewModelProtocol {
 	let filtersViewModel = FiltersViewModel()
+	let userViewModel = UserViewModel(configurationService: SampleConfigurationService(), userService: SampleUserService())
 	let state = JobsViewState.success(jobs: PreviewData.sampleJobs)
 	var searchText = ""
 	let activeFilterCount = 0

@@ -1,0 +1,15 @@
+[
+	{
+		"ID": 1,
+		"FirstName": "John",
+		"LastName": "Doe",
+		"PhoneNumber": "+358440000000",
+		"Email": "johndoe@gmail.com",
+		"DateOfBirth": "1990-01-01",
+		"Experience": "A bit of everything",
+		"Education": "Absolutely none",
+		"Skills": ["This", "That", "Anything"],
+		"JobApplications": null,
+		"FavoriteJobListings": null
+	}
+]
