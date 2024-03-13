@@ -26,7 +26,6 @@ enum UserViewSaveButtonState {
 }
 
 class UserViewModel<
-	SessionManager: SessionManagerProtocol,
 	ConfigurationService: ConfigurationServiceProtocol,
 	UserService: UserServiceProtocol
 >: UserViewModelProtocol {
@@ -35,13 +34,13 @@ class UserViewModel<
 	@Published var saveButtonState = UserViewSaveButtonState.ready
 	@Published var presentedError: LocalizedAlertError?
 
-	private let sessionManager: SessionManager
+	private let session: Session
 	private let configurationService: ConfigurationService
 	private let userService: UserService
 
-	init(sessionManager: SessionManager, configurationService: ConfigurationService, userService: UserService) {
+	init(session: Session, configurationService: ConfigurationService, userService: UserService) {
 		self.userId = configurationService.get(Configuration.currentUserId)
-		self.sessionManager = sessionManager
+		self.session = session
 		self.configurationService = configurationService
 		self.userService = userService
 
@@ -95,7 +94,7 @@ class UserViewModel<
 		userId = user?.id
 		configurationService.set(user?.id, for: Configuration.currentUserId)
 		state = .ready(user.map(UserTemplate.init) ?? UserTemplate())
-		sessionManager.user = user
+		session.user = user
 	}
 }
 

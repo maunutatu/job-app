@@ -9,7 +9,19 @@
 		"Experience": "A bit of everything",
 		"Education": "Absolutely none",
 		"Skills": ["This", "That", "Anything"],
-		"JobApplications": null,
+		"JobApplications": [
+			{
+				"ID": 1,
+				"User": 1,
+				"JobListing": 1,
+				"CoverLetter": "Hello can I work here?",
+				"Status": "sent",
+				"SentDate": "2024-03-10",
+				"RelevantSkills": ["This", "That"],
+				"JobTitle": "Software Developer",
+				"Company": "Example Software Inc."
+			}
+		],
 		"FavoriteJobListings": null
 	}
 ]

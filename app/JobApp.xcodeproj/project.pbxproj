@@ -27,6 +27,10 @@
 		27CA89B42BA11902009AAA9C /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CA89B32BA11902009AAA9C /* SessionManager.swift */; };
 		27CA89B62BA18145009AAA9C /* JobApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CA89B52BA18145009AAA9C /* JobApplication.swift */; };
 		27CA89B82BA19007009AAA9C /* KeyboardTypeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CA89B72BA19007009AAA9C /* KeyboardTypeModifier.swift */; };
+		27CA89BA2BA19607009AAA9C /* ApplicationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CA89B92BA19607009AAA9C /* ApplicationList.swift */; };
+		27CA89BC2BA19647009AAA9C /* ApplicationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CA89BB2BA19647009AAA9C /* ApplicationsViewModel.swift */; };
+		27CA89BE2BA1A293009AAA9C /* ApplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CA89BD2BA1A293009AAA9C /* ApplicationView.swift */; };
+		27CA89C02BA1A38B009AAA9C /* ApplicationListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CA89BF2BA1A38B009AAA9C /* ApplicationListRow.swift */; };
 		27CC1F3B2BA0BACF0004BDC8 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CC1F3A2BA0BACF0004BDC8 /* UserView.swift */; };
 		27CC1F3D2BA0C6A70004BDC8 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CC1F3C2BA0C6A70004BDC8 /* UserViewModel.swift */; };
 		27CC1F3F2BA0CA970004BDC8 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CC1F3E2BA0CA970004BDC8 /* UserService.swift */; };
@@ -60,6 +64,10 @@
 		27CA89B32BA11902009AAA9C /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		27CA89B52BA18145009AAA9C /* JobApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobApplication.swift; sourceTree = "<group>"; };
 		27CA89B72BA19007009AAA9C /* KeyboardTypeModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardTypeModifier.swift; sourceTree = "<group>"; };
+		27CA89B92BA19607009AAA9C /* ApplicationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationList.swift; sourceTree = "<group>"; };
+		27CA89BB2BA19647009AAA9C /* ApplicationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationsViewModel.swift; sourceTree = "<group>"; };
+		27CA89BD2BA1A293009AAA9C /* ApplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationView.swift; sourceTree = "<group>"; };
+		27CA89BF2BA1A38B009AAA9C /* ApplicationListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationListRow.swift; sourceTree = "<group>"; };
 		27CC1F3A2BA0BACF0004BDC8 /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		27CC1F3C2BA0C6A70004BDC8 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		27CC1F3E2BA0CA970004BDC8 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -152,6 +160,9 @@
 				278E36742B8E849300EAEC55 /* FiltersView.swift */,
 				27D601D62B8BF114002CC59D /* JobListRow.swift */,
 				27C829412B8D01DE00D622C6 /* JobView.swift */,
+				27CA89B92BA19607009AAA9C /* ApplicationList.swift */,
+				27CA89BF2BA1A38B009AAA9C /* ApplicationListRow.swift */,
+				27CA89BD2BA1A293009AAA9C /* ApplicationView.swift */,
 				275297DE2B8BFF6F00A8B612 /* ErrorView.swift */,
 				27CC1F3A2BA0BACF0004BDC8 /* UserView.swift */,
 			);
@@ -165,6 +176,7 @@
 				27CC1F3C2BA0C6A70004BDC8 /* UserViewModel.swift */,
 				278E36792B8E8F9900EAEC55 /* FiltersViewModel.swift */,
 				27CA89B12BA114ED009AAA9C /* JobViewModel.swift */,
+				27CA89BB2BA19647009AAA9C /* ApplicationsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -295,6 +307,7 @@
 				27D601D22B8BED44002CC59D /* JobsViewModel.swift in Sources */,
 				27CA89B42BA11902009AAA9C /* SessionManager.swift in Sources */,
 				27D601D42B8BEDDE002CC59D /* JobList.swift in Sources */,
+				27CA89BE2BA1A293009AAA9C /* ApplicationView.swift in Sources */,
 				2712043A2B81584D00F618DB /* JobApp.swift in Sources */,
 				2740DA332B8BD61A001E2C4A /* Configure.swift in Sources */,
 				27CA89AB2BA0DDCF009AAA9C /* HttpError+SampleData.swift in Sources */,
@@ -303,13 +316,16 @@
 				27CC1F3B2BA0BACF0004BDC8 /* UserView.swift in Sources */,
 				27C829422B8D01DE00D622C6 /* JobView.swift in Sources */,
 				27CA89AE2BA0E59D009AAA9C /* ConfigurationService.swift in Sources */,
+				27CA89BC2BA19647009AAA9C /* ApplicationsViewModel.swift in Sources */,
 				27CC1F3D2BA0C6A70004BDC8 /* UserViewModel.swift in Sources */,
 				27EBC5B62B81905900F769B1 /* Job.swift in Sources */,
+				27CA89C02BA1A38B009AAA9C /* ApplicationListRow.swift in Sources */,
 				27CA89B22BA114ED009AAA9C /* JobViewModel.swift in Sources */,
 				275297E22B8C0BF100A8B612 /* PreviewData.swift in Sources */,
 				27CA89B62BA18145009AAA9C /* JobApplication.swift in Sources */,
 				27D601D72B8BF114002CC59D /* JobListRow.swift in Sources */,
 				275297DF2B8BFF6F00A8B612 /* ErrorView.swift in Sources */,
+				27CA89BA2BA19607009AAA9C /* ApplicationList.swift in Sources */,
 				27CC1F412BA0CC450004BDC8 /* User.swift in Sources */,
 				278E367A2B8E8F9900EAEC55 /* FiltersViewModel.swift in Sources */,
 				27CA89B02BA0F5CF009AAA9C /* LocalizedAlertError.swift in Sources */,

@@ -66,7 +66,9 @@ class SampleJobService: JobServiceProtocol {
 			coverLetter: template.coverLetter,
 			status: template.status,
 			sentDate: template.sentDate,
-			relevantSkills: template.relevantSkills
+			relevantSkills: template.relevantSkills,
+			jobTitle: "",
+			company: ""
 		)
 	}
 }

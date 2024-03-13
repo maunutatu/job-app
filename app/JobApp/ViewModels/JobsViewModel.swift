@@ -4,10 +4,12 @@ import Combine
 @MainActor
 protocol JobsViewModelProtocol: ObservableObject {
 	associatedtype SomeFiltersViewModel: FiltersViewModelProtocol
+	associatedtype SomeApplicationsViewModel: ApplicationsViewModelProtocol
 	associatedtype SomeUserViewModel: UserViewModelProtocol
 	associatedtype SomeJobViewModel: JobViewModelProtocol
 
 	var filtersViewModel: SomeFiltersViewModel { get }
+	var applicationsViewModel: SomeApplicationsViewModel { get }
 	var userViewModel: SomeUserViewModel { get }
 	var state: JobsViewState { get }
 	var searchText: String { get set }
@@ -23,13 +25,13 @@ enum JobsViewState {
 }
 
 class JobsViewModel<
-	SessionManager: SessionManagerProtocol,
 	ConfigurationService: ConfigurationServiceProtocol,
 	JobService: JobServiceProtocol,
 	UserService: UserServiceProtocol
 >: JobsViewModelProtocol, ObservableObject {
 	@ObservedObject var filtersViewModel: FiltersViewModel
-	@ObservedObject var userViewModel: UserViewModel<SessionManager, ConfigurationService, UserService>
+	@ObservedObject var applicationsViewModel: ApplicationsViewModel
+	@ObservedObject var userViewModel: UserViewModel<ConfigurationService, UserService>
 
 	@Published var state = JobsViewState.loading
 	@Published var user: User?
@@ -37,19 +39,20 @@ class JobsViewModel<
 	@Published var activeFilterCount = 0
 
 	private var rawState = PassthroughSubject<JobsViewState, Never>()
-	private let sessionManager: SessionManager
+	private let session: Session
 	private let jobService: JobService
 	private let userService: UserService
 	private var jobs = [Job]()
 	private var cancellables = Set<AnyCancellable>()
 
-	init(sessionManager: SessionManager, configurationService: ConfigurationService, jobService: JobService, userService: UserService) {
-		self.sessionManager = sessionManager
+	init(session: Session, configurationService: ConfigurationService, jobService: JobService, userService: UserService) {
+		self.session = session
 		self.jobService = jobService
 		self.userService = userService
 		self.filtersViewModel = FiltersViewModel()
+		self.applicationsViewModel = ApplicationsViewModel(session: session)
 		self.userViewModel = UserViewModel(
-			sessionManager: sessionManager,
+			session: session,
 			configurationService: configurationService,
 			userService: userService
 		)
@@ -102,13 +105,14 @@ class JobsViewModel<
 		return .success(jobs: filteredJobs)
 	}
 
-	func jobViewModel(for job: Job) -> JobViewModel<SessionManager, JobService, UserService> {
-		JobViewModel(sessionManager: sessionManager, jobService: jobService, userService: userService, job: job)
+	func jobViewModel(for job: Job) -> JobViewModel<JobService, UserService> {
+		JobViewModel(session: session, jobService: jobService, userService: userService, job: job)
 	}
 }
 
 class JobsViewModelPreview: JobsViewModelProtocol {
 	let filtersViewModel = FiltersViewModel()
+	let applicationsViewModel = SampleApplicationsViewModel()
 	let userViewModel = SampleUserViewModel(loggedIn: true)
 	let state = JobsViewState.success(jobs: PreviewData.sampleJobs)
 	var searchText = ""

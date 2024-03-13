@@ -28,7 +28,12 @@ struct JobList<ViewModel: JobsViewModelProtocol>: View {
 					Image(systemName: "list.bullet.circle")
 					Text("tab.jobs")
 				}
-			userTab()
+			applicationsTab
+				.tabItem {
+					Image(systemName: "doc.circle")
+					Text("tab.applications")
+				}
+			userTab
 				.tabItem {
 					Image(systemName: "person.crop.circle")
 					Text("tab.user")
@@ -84,7 +89,12 @@ struct JobList<ViewModel: JobsViewModelProtocol>: View {
 	}
 
 	@ViewBuilder
-	private func userTab() -> some View {
+	private var applicationsTab: some View {
+		ApplicationList(viewModel: viewModel.applicationsViewModel)
+	}
+
+	@ViewBuilder
+	private var userTab: some View {
 		UserView(viewModel: viewModel.userViewModel)
 	}
 
