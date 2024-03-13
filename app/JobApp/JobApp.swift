@@ -31,3 +31,7 @@ struct JobApp: App {
 		}
 	}
 }
+
+enum GlobalConstant {
+	static let appName = "Jobitti"
+}

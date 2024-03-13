@@ -80,6 +80,7 @@ struct JobList<ViewModel: JobsViewModelProtocol>: View {
 				.scrollBounceBehavior(.basedOnSize)
 			}
 		}
+		.navigationTitle(GlobalConstant.appName)
 	}
 
 	@ViewBuilder
