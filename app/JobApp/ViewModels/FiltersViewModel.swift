@@ -7,16 +7,13 @@ protocol FiltersViewModelProtocol: ObservableObject {
 	var employmentTypes: [FilterState] { get set }
 	var fields: [FilterState] { get set }
 	var activeFilterCount: Int { get }
+
+	func clearFilters()
 }
 
-class FilterState: ObservableObject {
+struct FilterState {
 	let name: String
-	@Published var isEnabled: Bool
-
-	init(name: String, isEnabled: Bool) {
-		self.name = name
-		self.isEnabled = isEnabled
-	}
+	var isEnabled: Bool
 }
 
 class FiltersViewModel: FiltersViewModelProtocol, ObservableObject {
@@ -45,6 +42,18 @@ class FiltersViewModel: FiltersViewModelProtocol, ObservableObject {
 			.map { ($0.0 + $0.1 + $0.2).filter(\.isEnabled).count }
 			.assign(to: \.activeFilterCount, on: self)
 			.store(in: &cancellables)
+	}
+
+	func clearFilters() {
+		let reset: ([FilterState]) -> [FilterState] = {
+			$0.map {
+				FilterState(name: $0.name, isEnabled: false)
+			}
+		}
+
+		locations = reset(locations)
+		employmentTypes = reset(employmentTypes)
+		fields = reset(fields)
 	}
 
 	private static func createFilters<T>(for keyPath: KeyPath<T, String>, from objects: [T]) -> [FilterState] {
