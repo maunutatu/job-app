@@ -42,6 +42,11 @@ struct JobView<ViewModel: JobViewModelProtocol>: View {
 		.toolbar {
 			URL(string: "https://example.com").map { ShareLink(item: $0) }
 		}
+		.alert(isPresented: .constant(viewModel.presentedError != nil), error: viewModel.presentedError) {
+			Button("common.ok", role: .cancel) {
+				viewModel.presentedError = nil
+			}
+		}
 	}
 
 	@ViewBuilder

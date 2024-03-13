@@ -8,8 +8,8 @@ struct JobApplication: Identifiable, Codable, Hashable {
 	let status: String
 	let sentDate: Date
 	let relevantSkills: [String]
-	let jobTitle: String
-	let company: String
+	let jobTitle: String?
+	let company: String?
 
 	enum CodingKeys: String, CodingKey {
 		case id = "ID"
@@ -31,4 +31,13 @@ struct JobApplicationTemplate: Codable {
 	let status: String
 	let sentDate: Date
 	let relevantSkills: [String]
+
+	enum CodingKeys: String, CodingKey {
+		case userId = "User"
+		case jobId = "JobListing"
+		case coverLetter = "CoverLetter"
+		case status = "Status"
+		case sentDate = "SentDate"
+		case relevantSkills = "RelevantSkills"
+	}
 }

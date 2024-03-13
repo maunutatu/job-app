@@ -10,9 +10,9 @@ struct ApplicationListRow: View {
 	var body: some View {
 		HStack {
 			VStack(alignment: .leading) {
-				Text(application.company)
+				Text(application.company ?? "")
 					.font(.headline)
-				Text(application.jobTitle)
+				Text(application.jobTitle ?? "")
 					.font(.subheadline)
 				Text(String(format: String(localized: "application.sentDate"), application.sentDate.formatted(date: .long, time: .omitted)))
 					.font(.footnote)

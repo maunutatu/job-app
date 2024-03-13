@@ -12,9 +12,9 @@ struct ApplicationView: View {
 			HStack {
 				VStack(alignment: .leading, spacing: 12) {
 					VStack(alignment: .leading, spacing: 4) {
-						Text(application.company)
+						Text(application.company ?? "")
 							.font(.title)
-						Text(application.jobTitle)
+						Text(application.jobTitle ?? "")
 							.font(.headline)
 					}
 					Divider()
