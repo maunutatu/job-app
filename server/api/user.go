@@ -18,7 +18,7 @@ func (s *Service) GetUser(c *gin.Context) {
 	userID, err := strconv.Atoi(userIDStr)
 
 	if err != nil {
-		c.JSON(500, gin.H{"error": "Invalid user id"})
+		c.JSON(400, gin.H{"error": "Invalid user id"})
 		return
 	}
 
@@ -55,7 +55,7 @@ func (s *Service) CreateUser(c *gin.Context) {
 	err := c.BindJSON(&user)
 
 	if err != nil {
-		c.JSON(500, err)
+		c.JSON(400, err)
 		return
 	}
 
@@ -74,7 +74,7 @@ func (s *Service) UpdateUser(c *gin.Context) {
 	err := c.BindJSON(&user)
 
 	if err != nil {
-		c.JSON(500, err)
+		c.JSON(400, err)
 		return
 	}
 
