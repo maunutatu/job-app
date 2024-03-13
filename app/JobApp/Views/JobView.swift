@@ -1,10 +1,20 @@
 import SwiftUI
 
-struct JobView: View {
-	private let job: Job
+@MainActor
+struct JobView<ViewModel: JobViewModelProtocol>: View {
+	struct Skill: Identifiable {
+		var id: String { name }
+		var name: String
+		var isSelected: Bool
+	}
 
-	init(job: Job) {
-		self.job = job
+	@ObservedObject private var viewModel: ViewModel
+
+	@State private var coverLetter = ""
+	@State private var skills: [Skill] = []
+
+	init(viewModel: ViewModel) {
+		self.viewModel = viewModel
 	}
 
 	var body: some View {
@@ -14,10 +24,21 @@ struct JobView: View {
 				Divider()
 				content
 				Spacer()
-				footer
+				switch viewModel.state {
+					case .notLoggedIn:
+						nogLoggedIn
+					case .loggedIn(let skills):
+						application
+							.onChange(of: viewModel.state, initial: true) {
+								self.skills = skills.map { Skill(name: $0, isSelected: false) }
+							}
+					case .applicationSent:
+						alreadyApplied
+				}
 			}
 			.padding()
 		}
+		.scrollDismissesKeyboard(.interactively)
 		.toolbar {
 			URL(string: "https://example.com").map { ShareLink(item: $0) }
 		}
@@ -26,9 +47,9 @@ struct JobView: View {
 	@ViewBuilder
 	private var header: some View {
 		VStack(alignment: .leading, spacing: 8) {
-			Text(job.title)
+			Text(viewModel.job.title)
 				.font(.headline)
-			Text(job.company + " • " + job.location)
+			Text(viewModel.job.company + " • " + viewModel.job.location)
 				.font(.subheadline)
 		}
 	}
@@ -36,29 +57,79 @@ struct JobView: View {
 	@ViewBuilder
 	private var content: some View {
 		VStack(alignment: .leading, spacing: 8) {
-			Text(String(format: String(localized: "job.postedAt"), job.datePosted.formatted(date: .abbreviated, time: .omitted)))
+			Text(String(format: String(localized: "job.postedAt"), viewModel.job.datePosted.formatted(date: .abbreviated, time: .omitted)))
 				.font(.footnote)
-			Text(job.employmentType + ", " + job.workingHours)
+			Text(viewModel.job.employmentType + ", " + viewModel.job.workingHours)
 				.font(.caption)
 			Spacer()
-			Text(job.description)
+			Text(viewModel.job.description)
 		}
 	}
 
 	@ViewBuilder
-	private var footer: some View {
-		NavigationLink(destination: JobApplicationView()) {
-			Spacer()
-			Text("job.applyButton")
-			Spacer()
+	private var application: some View {
+		VStack(alignment: .leading, spacing: 32) {
+			VStack(alignment: .leading, spacing: 12) {
+				Text("job.coverLetter")
+					.font(.caption)
+				TextEditor(text: $coverLetter)
+					.frame(height: 200)
+					.overlay(
+						RoundedRectangle(cornerRadius: 4)
+							.stroke(Color.gray, lineWidth: 0.5)
+					)
+			}
+
+			VStack(alignment: .leading, spacing: 8) {
+				Text("job.relevantSkillsTitle")
+					.font(.caption)
+				if skills.isEmpty {
+					Text("job.noSkillsForUser")
+				} else {
+					ForEach($skills) { $skill in
+						Toggle(isOn: $skill.isSelected) {
+							Text(skill.name)
+						}
+					}
+				}
+			}
+
+			Button(action: sendApplication) {
+				Spacer()
+				Text("job.applyButton")
+				Spacer()
+			}
+			.buttonStyle(BorderedProminentButtonStyle())
+			.controlSize(.large)
 		}
-		.buttonStyle(BorderedProminentButtonStyle())
-		.controlSize(.large)
+	}
+
+	@ViewBuilder
+	private var nogLoggedIn: some View {
+		VStack {
+			Divider()
+			Text("job.notLoggedIn")
+				.padding()
+		}
+	}
+
+	@ViewBuilder
+	private var alreadyApplied: some View {
+		VStack {
+			Divider()
+			Text("job.alreadyApplied")
+				.padding()
+		}
+	}
+
+	private func sendApplication() {
+		let selectedSkills = skills.filter(\.isSelected).map(\.name)
+		viewModel.sendApplication(coverLetter: coverLetter, relevantSkills: selectedSkills)
 	}
 }
 
 #Preview {
 	NavigationStack {
-		JobView(job: PreviewData.sampleJob)
+		JobView(viewModel: SampleJobViewModel(job: PreviewData.sampleJob))
 	}
 }

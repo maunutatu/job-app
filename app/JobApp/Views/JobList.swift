@@ -22,6 +22,27 @@ struct JobList<ViewModel: JobsViewModelProtocol>: View {
 
 	@ViewBuilder
 	func content(jobs: [Job]) -> some View {
+		TabView {
+			jobsTab(with: jobs)
+				.tabItem {
+					Image(systemName: "list.bullet.circle")
+					Text("tab.jobs")
+				}
+			applicationsTab
+				.tabItem {
+					Image(systemName: "doc.circle")
+					Text("tab.applications")
+				}
+			userTab
+				.tabItem {
+					Image(systemName: "person.crop.circle")
+					Text("tab.user")
+				}
+		}
+	}
+
+	@ViewBuilder
+	private func jobsTab(with jobs: [Job]) -> some View {
 		NavigationSplitView(
 			columnVisibility: .constant(.all),
 			sidebar: { sidebar(with: jobs) },
@@ -55,7 +76,7 @@ struct JobList<ViewModel: JobsViewModelProtocol>: View {
 			Button {
 				filtersShown = true
 			} label: {
-				Image(systemName: "line.3.horizontal.decrease.circle")
+				Text(filterButtonTitle).bold()
 			}
 			.popover(isPresented: $filtersShown) {
 				ScrollView {
@@ -64,6 +85,17 @@ struct JobList<ViewModel: JobsViewModelProtocol>: View {
 				.scrollBounceBehavior(.basedOnSize)
 			}
 		}
+		.navigationTitle(GlobalConstant.appName)
+	}
+
+	@ViewBuilder
+	private var applicationsTab: some View {
+		ApplicationList(viewModel: viewModel.applicationsViewModel)
+	}
+
+	@ViewBuilder
+	private var userTab: some View {
+		UserView(viewModel: viewModel.userViewModel)
 	}
 
 	@ViewBuilder
@@ -81,11 +113,17 @@ struct JobList<ViewModel: JobsViewModelProtocol>: View {
 	private var detail: some View {
 		if let selectedJob {
 			NavigationStack {
-				JobView(job: selectedJob)
+				JobView(viewModel: viewModel.jobViewModel(for: selectedJob))
 			}
 		} else {
 			Text("job.noneSelected")
 		}
+	}
+
+	private var filterButtonTitle: String {
+		let title = String(localized: "job.filterButton")
+		let activeFilterCount = viewModel.activeFilterCount
+		return title + (activeFilterCount > 0 ? " (\(activeFilterCount))" : "")
 	}
 }
 

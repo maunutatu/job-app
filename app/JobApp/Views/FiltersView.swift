@@ -9,7 +9,16 @@ struct FiltersView<ViewModel: FiltersViewModelProtocol>: View {
 	}
 
 	var body: some View {
-		VStack(alignment: .leading, spacing: 32) {
+		VStack(spacing: 32) {
+			HStack {
+				Text(String(format: String(localized: "filters.activeCount"), viewModel.activeFilterCount))
+					.font(.caption)
+				Spacer()
+				Button(action: viewModel.clearFilters) {
+					Text("filters.clearButton")
+				}
+				.disabled(viewModel.activeFilterCount == 0)
+			}
 			VStack(alignment: .leading) {
 				Text("filters.location")
 					.font(.headline)

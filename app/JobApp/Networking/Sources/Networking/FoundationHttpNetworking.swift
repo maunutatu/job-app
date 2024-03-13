@@ -18,23 +18,16 @@ public struct FoundationHttpNetworking: HttpNetworking {
 		}
 
 		var request = URLRequest(url: url)
-		request.httpMethod = method.value
+		request.httpMethod = method.rawValue
 		request.httpBody = payload
 
 		let (data, response) = try await session.data(for: request)
 
 		if let httpResponse = response as? HTTPURLResponse, !(200 ... 299).contains(httpResponse.statusCode) {
-			throw HttpError(url: url, statusCode: httpResponse.statusCode)
+			let message = String(data: data, encoding: .utf8)
+			throw HttpError(url: url, statusCode: httpResponse.statusCode, message: message)
 		}
 
 		return data
-	}
-}
-
-extension HttpMethod {
-	var value: String {
-		switch self {
-			case .get: return "GET"
-		}
 	}
 }
