@@ -44,7 +44,7 @@ func (s *Service) RemoveUserFavoriteJobListing(c *gin.Context) {
 	userID, err := strconv.Atoi(userIDString)
 
 	if err != nil {
-		c.JSON(500, gin.H{"error": "Invalid user id"})
+		c.JSON(400, gin.H{"error": "Invalid user id"})
 		return
 	}
 
@@ -52,7 +52,7 @@ func (s *Service) RemoveUserFavoriteJobListing(c *gin.Context) {
 	jobListingID, err := strconv.Atoi(jobListingIDString)
 
 	if err != nil {
-		c.JSON(500, gin.H{"error": "Invalid job listing id"})
+		c.JSON(400, gin.H{"error": "Invalid job listing id"})
 		return
 	}
 
