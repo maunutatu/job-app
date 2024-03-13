@@ -89,12 +89,12 @@ class JobsViewModel<
 		guard case .success(let jobs) = state else { return state }
 
 		let filteredJobs = jobs.filter {
-			let content = [$0.title, $0.description, $0.company, $0.employmentType]
+			let content = [$0.title, $0.description, $0.company, $0.employmentType].map { $0.lowercased() }
 			let enabledLocations = locations.filter(\.isEnabled).map(\.name)
 			let enabledEmploymentTypes = employmentTypes.filter(\.isEnabled).map(\.name)
 			let enabledFields = fields.filter(\.isEnabled).map(\.name)
 
-			let contentMatches = searchText.isEmpty || content.contains { $0.contains(searchText) }
+			let contentMatches = searchText.isEmpty || content.contains { $0.contains(searchText.lowercased()) }
 			let locationMatches = enabledLocations.isEmpty || enabledLocations.contains($0.location)
 			let employmentTypeMatches = enabledEmploymentTypes.isEmpty || enabledEmploymentTypes.contains($0.employmentType)
 			let fieldMatches = enabledFields.isEmpty || enabledFields.contains($0.field)
