@@ -32,7 +32,7 @@ func (s *Service) AddUserFavoriteJobListing(c *gin.Context) {
 	err = s.queries.AddUserFavoriteJobListing(c, userFavoriteJobListing)
 
 	if err != nil {
-		c.JSON(500, err)
+		c.JSON(500, gin.H{"error": err.Error()})
 		return
 	}
 
@@ -64,7 +64,7 @@ func (s *Service) RemoveUserFavoriteJobListing(c *gin.Context) {
 	err = s.queries.RemoveUserFavoriteJobListing(c, userFavoriteJobListing)
 
 	if err != nil {
-		c.JSON(500, err)
+		c.JSON(500, gin.H{"error": err.Error()})
 		return
 	}
 
