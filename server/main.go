@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"github.com/gin-gonic/gin"
-	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgxpool"
 	"os"
 	"server/api"
 	"server/database"
@@ -19,19 +19,19 @@ func main() {
 	dbPort := os.Getenv("POSTGRES_PORT")
 	dbHost := os.Getenv("POSTGRES_HOST")
 
-	conn, err := pgx.Connect(ctx, "host="+dbHost+" port="+dbPort+" user="+dbUser+" password="+dbPassword+" dbname="+dbName)
+	dbpool, err := pgxpool.New(ctx, "host="+dbHost+" port="+dbPort+" user="+dbUser+" password="+dbPassword+" dbname="+dbName)
 	if err != nil {
 		panic(err)
 	}
-	defer conn.Close(ctx)
+	defer dbpool.Close()
 
 	// ping db
-	err = conn.Ping(ctx)
+	err = dbpool.Ping(ctx)
 	if err != nil {
 		panic(err)
 	}
 
-	queries := database.New(conn)
+	queries := database.New(dbpool)
 
 	router := gin.Default()
 

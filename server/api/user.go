@@ -25,19 +25,19 @@ func (s *Service) GetUser(c *gin.Context) {
 	user, err := s.queries.GetUser(context.Background(), int32(userID))
 
 	if err != nil {
-		c.JSON(500, err)
+		c.JSON(500, gin.H{"error": err.Error()})
 		return
 	}
 
 	jobApplications, err := s.queries.GetUserJobApplications(context.Background(), int32(userID))
 	if err != nil {
-		c.JSON(500, err)
+		c.JSON(500, gin.H{"error": err.Error()})
 		return
 	}
 
 	favoriteJobListings, err := s.queries.GetUserFavoriteJobListings(context.Background(), int32(userID))
 	if err != nil {
-		c.JSON(500, err)
+		c.JSON(500, gin.H{"error": err.Error()})
 		return
 	}
 
@@ -62,7 +62,7 @@ func (s *Service) CreateUser(c *gin.Context) {
 	newUser, err := s.queries.CreateUser(context.Background(), user)
 
 	if err != nil {
-		c.JSON(500, err)
+		c.JSON(500, gin.H{"error": err.Error()})
 		return
 	}
 
@@ -81,7 +81,7 @@ func (s *Service) UpdateUser(c *gin.Context) {
 	newUser, err := s.queries.UpdateUser(context.Background(), user)
 
 	if err != nil {
-		c.JSON(500, err)
+		c.JSON(500, gin.H{"error": err.Error()})
 		return
 	}
 

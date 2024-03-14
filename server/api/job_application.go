@@ -31,7 +31,7 @@ func (s *Service) GetJobApplication(c *gin.Context) {
 	jobApplication, err := s.queries.GetJobApplication(context.Background(), arg)
 
 	if err != nil {
-		c.JSON(500, err)
+		c.JSON(500, gin.H{"error": err.Error()})
 		return
 	}
 
@@ -50,7 +50,7 @@ func (s *Service) CreateJobApplication(c *gin.Context) {
 	newJobApplication, err := s.queries.CreateJobApplication(context.Background(), jobApplication)
 
 	if err != nil {
-		c.JSON(500, err)
+		c.JSON(500, gin.H{"error": err.Error()})
 		return
 	}
 
@@ -68,7 +68,7 @@ func (s *Service) UpdateJobApplication(c *gin.Context) {
 	updatedJobApplication, err := s.queries.UpdateJobApplication(context.Background(), jobApplication)
 
 	if err != nil {
-		c.JSON(500, err)
+		c.JSON(500, gin.H{"error": err.Error()})
 		return
 	}
 
@@ -99,7 +99,7 @@ func (s *Service) DeleteJobApplication(c *gin.Context) {
 	err = s.queries.DeleteJobApplication(context.Background(), arg)
 
 	if err != nil {
-		c.JSON(500, err)
+		c.JSON(500, gin.H{"error": err.Error()})
 		return
 	}
 
