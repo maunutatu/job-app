@@ -13,6 +13,7 @@ struct Job: Identifiable, Codable, Hashable {
 	let field: String
 	let workingHours: String
 	let employmentType: String
+	let schedule: JobSchedule
 
 	enum CodingKeys: String, CodingKey {
 		case id = "ID"
@@ -27,6 +28,7 @@ struct Job: Identifiable, Codable, Hashable {
 		case field = "Field"
 		case workingHours = "WorkingHours"
 		case employmentType = "EmploymentType"
+		case schedule = "Schedule"
 	}
 
 	static let dateFormatter = configure(DateFormatter()) {

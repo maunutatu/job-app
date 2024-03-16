@@ -57,10 +57,21 @@ class JobsViewModel<
 			userService: userService
 		)
 
-		rawState
-			.combineLatest($searchText)
-			.combineLatest(filtersViewModel.$locations, filtersViewModel.$employmentTypes, filtersViewModel.$fields)
-			.map { Self.filteredState($0.0.0, searchText: $0.0.1, locations: $0.1, employmentTypes: $0.2, fields: $0.3) }
+		let tagFilters = Publishers.CombineLatest3(filtersViewModel.$locations, filtersViewModel.$employmentTypes, filtersViewModel.$fields)
+		let scheduleFilters = Publishers.CombineLatest(filtersViewModel.$scheduleStart, filtersViewModel.$scheduleEnd)
+
+		Publishers.CombineLatest4(rawState, $searchText, tagFilters, scheduleFilters)
+			.map {
+				let (rawState, searchText, (locations, employmentTypes, fields), (scheduleStart, scheduleEnd)) = $0
+				return Self.filteredState(
+					rawState,
+					searchText: searchText,
+					locations: locations,
+					employmentTypes: employmentTypes,
+					fields: fields,
+					schedule: scheduleStart ... scheduleEnd
+				)
+			}
 			.assign(to: \.state, on: self)
 			.store(in: &cancellables)
 
@@ -84,7 +95,8 @@ class JobsViewModel<
 		searchText: String,
 		locations: [FilterState],
 		employmentTypes: [FilterState],
-		fields: [FilterState]
+		fields: [FilterState],
+		schedule: ClosedRange<Int>
 	) -> JobsViewState {
 		guard case .success(let jobs) = state else { return state }
 
@@ -99,7 +111,12 @@ class JobsViewModel<
 			let employmentTypeMatches = enabledEmploymentTypes.isEmpty || enabledEmploymentTypes.contains($0.employmentType)
 			let fieldMatches = enabledFields.isEmpty || enabledFields.contains($0.field)
 
-			return contentMatches && locationMatches && employmentTypeMatches && fieldMatches
+			var scheduleMatches = true
+			if case let .hours(start: start, end: end) = $0.schedule {
+				scheduleMatches = start >= schedule.lowerBound && end <= schedule.upperBound
+			}
+
+			return contentMatches && locationMatches && employmentTypeMatches && fieldMatches && scheduleMatches
 		}
 
 		return .success(jobs: filteredJobs)

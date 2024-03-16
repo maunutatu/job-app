@@ -35,6 +35,7 @@
 		27CC1F3D2BA0C6A70004BDC8 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CC1F3C2BA0C6A70004BDC8 /* UserViewModel.swift */; };
 		27CC1F3F2BA0CA970004BDC8 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CC1F3E2BA0CA970004BDC8 /* UserService.swift */; };
 		27CC1F412BA0CC450004BDC8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CC1F402BA0CC450004BDC8 /* User.swift */; };
+		27D423062BA5977700458D33 /* JobSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D423052BA5977700458D33 /* JobSchedule.swift */; };
 		27D601D22B8BED44002CC59D /* JobsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D601D12B8BED44002CC59D /* JobsViewModel.swift */; };
 		27D601D42B8BEDDE002CC59D /* JobList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D601D32B8BEDDE002CC59D /* JobList.swift */; };
 		27D601D72B8BF114002CC59D /* JobListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D601D62B8BF114002CC59D /* JobListRow.swift */; };
@@ -72,6 +73,7 @@
 		27CC1F3C2BA0C6A70004BDC8 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		27CC1F3E2BA0CA970004BDC8 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		27CC1F402BA0CC450004BDC8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		27D423052BA5977700458D33 /* JobSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSchedule.swift; sourceTree = "<group>"; };
 		27D601D12B8BED44002CC59D /* JobsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsViewModel.swift; sourceTree = "<group>"; };
 		27D601D32B8BEDDE002CC59D /* JobList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobList.swift; sourceTree = "<group>"; };
 		27D601D52B8BEE89002CC59D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				27EBC5B52B81905900F769B1 /* Job.swift */,
 				27CC1F402BA0CC450004BDC8 /* User.swift */,
 				27CA89B52BA18145009AAA9C /* JobApplication.swift */,
+				27D423052BA5977700458D33 /* JobSchedule.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				27CC1F412BA0CC450004BDC8 /* User.swift in Sources */,
 				278E367A2B8E8F9900EAEC55 /* FiltersViewModel.swift in Sources */,
 				27CA89B02BA0F5CF009AAA9C /* LocalizedAlertError.swift in Sources */,
+				27D423062BA5977700458D33 /* JobSchedule.swift in Sources */,
 				27CC1F3F2BA0CA970004BDC8 /* UserService.swift in Sources */,
 				27EBC5AF2B818C8700F769B1 /* JobService.swift in Sources */,
 				27CA89B82BA19007009AAA9C /* KeyboardTypeModifier.swift in Sources */,
