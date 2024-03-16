@@ -62,7 +62,8 @@ class UserViewModel<
 		Task {
 			do {
 				if let userId {
-					setUser(try await userService.updateUser(User(id: userId, template: template)))
+					_ = try await userService.updateUser(User(id: userId, template: template))
+					setUser(try await userService.getUser(withId: userId))
 				} else {
 					setUser(try await userService.createUser(from: template))
 				}
