@@ -66,6 +66,8 @@ struct JobView<ViewModel: JobViewModelProtocol>: View {
 				.font(.footnote)
 			Text(viewModel.job.employmentType + ", " + viewModel.job.workingHours)
 				.font(.caption)
+			Text(String(format: String(localized: "job.schedule"), viewModel.job.schedule.description))
+				.font(.caption)
 			Spacer()
 			Text(viewModel.job.description)
 		}

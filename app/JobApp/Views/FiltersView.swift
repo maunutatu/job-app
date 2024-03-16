@@ -9,7 +9,7 @@ struct FiltersView<ViewModel: FiltersViewModelProtocol>: View {
 	}
 
 	var body: some View {
-		VStack(spacing: 32) {
+		VStack(alignment: .leading, spacing: 32) {
 			HStack {
 				Text(String(format: String(localized: "filters.activeCount"), viewModel.activeFilterCount))
 					.font(.caption)
@@ -51,6 +51,31 @@ struct FiltersView<ViewModel: FiltersViewModelProtocol>: View {
 							.toggleStyle(.button)
 					}
 				}
+			}
+			VStack(alignment: .leading) {
+				Text("filters.schedule")
+					.font(.headline)
+				Divider()
+				HStack {
+					Picker(selection: $viewModel.scheduleStart) {
+						ForEach(0...23, id: \.self) {
+							Text(String($0))
+						}
+					} label: {
+						EmptyView()
+					}
+					.frame(width: 64)
+					Text(verbatim: "–")
+					Picker(selection: $viewModel.scheduleEnd) {
+						ForEach(1...24, id: \.self) {
+							Text(String($0))
+						}
+					} label: {
+						EmptyView()
+					}
+					.frame(width: 64)
+				}
+				.pickerStyle(MenuPickerStyle())
 			}
 		}
 		.frame(maxHeight: .infinity, alignment: .top)

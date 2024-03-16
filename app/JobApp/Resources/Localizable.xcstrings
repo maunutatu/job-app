@@ -11,7 +11,7 @@
         },
         "fi" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Saatekirje"
           }
         }
@@ -329,6 +329,22 @@
         }
       }
     },
+    "filters.schedule" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schedule"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Työaika"
+          }
+        }
+      }
+    },
     "job.alreadyApplied" : {
       "localizations" : {
         "en" : {
@@ -488,6 +504,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Soveltuvat taidot:"
+          }
+        }
+      }
+    },
+    "job.schedule" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schedule: %@"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Työaika: %@"
+          }
+        }
+      }
+    },
+    "job.schedule.flexible" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Flexible"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Joustava"
           }
         }
       }
