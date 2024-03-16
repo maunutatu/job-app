@@ -154,9 +154,18 @@ struct UserView<ViewModel: UserViewModelProtocol>: View {
 					Text("user.skills")
 						.font(.headline)
 					ForEach($skills.indices, id: \.self) { index in
-						TextField("user.skillPlaceholder", text: $skills[index])
-							.focused($focusedField, equals: .skill(index: index))
-							.submitLabel(.done)
+						HStack {
+							TextField("user.skillPlaceholder", text: $skills[index])
+								.focused($focusedField, equals: .skill(index: index))
+								.submitLabel(.done)
+							Button {
+								removeSkill(index)
+							} label: {
+								Image(systemName: "trash.fill")
+							}
+							.buttonStyle(BorderlessButtonStyle())
+						}
+						.frame(minHeight: 32)
 						Divider()
 					}
 					Button("user.addSkill", systemImage: "plus", action: addSkill)
@@ -185,7 +194,7 @@ struct UserView<ViewModel: UserViewModelProtocol>: View {
 				}
 				if let userId = viewModel.userId {
 					Text(String(format: String(localized: "user.logoutSubtitle"), userId))
-					.font(.footnote)
+						.font(.footnote)
 				}
 			}
 			.frame(maxWidth: .infinity)
@@ -196,6 +205,10 @@ struct UserView<ViewModel: UserViewModelProtocol>: View {
 
 	private func addSkill() {
 		skills.append("")
+	}
+
+	private func removeSkill(_ index: Int) {
+		skills.remove(at: index)
 	}
 
 	private func save() {
