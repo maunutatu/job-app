@@ -168,9 +168,13 @@ struct UserView<ViewModel: UserViewModelProtocol>: View {
 						.frame(minHeight: 32)
 						Divider()
 					}
-					Button("user.addSkill", systemImage: "plus", action: addSkill)
-						.padding(4)
-						.buttonStyle(BorderlessButtonStyle())
+					Button(action: addSkill) {
+						Image(systemName: "plus")
+						Text("user.addSkill")
+					}
+					.padding(4)
+					.buttonStyle(BorderlessButtonStyle())
+					.disabled(!skills.isEmpty && skills.last?.isEmpty == true)
 				}
 			}
 
@@ -205,6 +209,7 @@ struct UserView<ViewModel: UserViewModelProtocol>: View {
 	}
 
 	private func addSkill() {
+		guard skills.last?.isEmpty != true else { return }
 		skills.append("")
 	}
 
@@ -213,6 +218,7 @@ struct UserView<ViewModel: UserViewModelProtocol>: View {
 	}
 
 	private func save() {
+		skills = skills.filter { !$0.isEmpty }
 		let template = UserTemplate(
 			firstName: firstName,
 			lastName: lastName,
