@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2712043A2B81584D00F618DB /* JobApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271204392B81584D00F618DB /* JobApp.swift */; };
+		2712043A2B81584D00F618DB /* Jobitti.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271204392B81584D00F618DB /* Jobitti.swift */; };
 		2740DA302B8BD261001E2C4A /* SampleJobs.json in Resources */ = {isa = PBXBuildFile; fileRef = 2740DA2F2B8BD261001E2C4A /* SampleJobs.json */; };
 		2740DA332B8BD61A001E2C4A /* Configure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740DA322B8BD61A001E2C4A /* Configure.swift */; };
 		27418FC72B8BE2E1004E078E /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27418FC62B8BE2E1004E078E /* Icons.xcassets */; };
@@ -45,9 +45,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		271204362B81584D00F618DB /* JobApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JobApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		271204392B81584D00F618DB /* JobApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobApp.swift; sourceTree = "<group>"; };
-		2712043F2B81584E00F618DB /* JobApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JobApp.entitlements; sourceTree = "<group>"; };
+		271204362B81584D00F618DB /* Jobitti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jobitti.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		271204392B81584D00F618DB /* Jobitti.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jobitti.swift; sourceTree = "<group>"; };
+		2712043F2B81584E00F618DB /* Jobitti.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Jobitti.entitlements; sourceTree = "<group>"; };
 		2740DA2F2B8BD261001E2C4A /* SampleJobs.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SampleJobs.json; sourceTree = "<group>"; };
 		2740DA322B8BD61A001E2C4A /* Configure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configure.swift; sourceTree = "<group>"; };
 		27418FC62B8BE2E1004E078E /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 		271204172B81556C00F618DB = {
 			isa = PBXGroup;
 			children = (
-				271204382B81584D00F618DB /* JobApp */,
+				271204382B81584D00F618DB /* Jobitti */,
 				271204372B81584D00F618DB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -109,15 +109,15 @@
 		271204372B81584D00F618DB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				271204362B81584D00F618DB /* JobApp.app */,
+				271204362B81584D00F618DB /* Jobitti.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		271204382B81584D00F618DB /* JobApp */ = {
+		271204382B81584D00F618DB /* Jobitti */ = {
 			isa = PBXGroup;
 			children = (
-				271204392B81584D00F618DB /* JobApp.swift */,
+				271204392B81584D00F618DB /* Jobitti.swift */,
 				27EBC5BA2B8193FF00F769B1 /* Services */,
 				27D601CF2B8BED02002CC59D /* Views */,
 				27EBC5B92B8193F700F769B1 /* Models */,
@@ -126,14 +126,14 @@
 				2740DA2E2B8BD22F001E2C4A /* Resources */,
 				27EBC5AD2B818B9100F769B1 /* Networking */,
 			);
-			path = JobApp;
+			path = Jobitti;
 			sourceTree = "<group>";
 		};
 		2740DA2E2B8BD22F001E2C4A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				27D601D52B8BEE89002CC59D /* Info.plist */,
-				2712043F2B81584E00F618DB /* JobApp.entitlements */,
+				2712043F2B81584E00F618DB /* Jobitti.entitlements */,
 				2740DA2F2B8BD261001E2C4A /* SampleJobs.json */,
 				27CA89A92BA0D952009AAA9C /* SampleUsers.json */,
 				27418FC62B8BE2E1004E078E /* Icons.xcassets */,
@@ -208,9 +208,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		271204352B81584D00F618DB /* JobApp */ = {
+		271204352B81584D00F618DB /* Jobitti */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 271204432B81584E00F618DB /* Build configuration list for PBXNativeTarget "JobApp" */;
+			buildConfigurationList = 271204432B81584E00F618DB /* Build configuration list for PBXNativeTarget "Jobitti" */;
 			buildPhases = (
 				271204322B81584D00F618DB /* Sources */,
 				271204332B81584D00F618DB /* Frameworks */,
@@ -221,13 +221,13 @@
 			);
 			dependencies = (
 			);
-			name = JobApp;
+			name = Jobitti;
 			packageProductDependencies = (
 				27EBC5B32B818E5300F769B1 /* Networking */,
 				278E36772B8E895700EAEC55 /* Flow */,
 			);
 			productName = JobApp;
-			productReference = 271204362B81584D00F618DB /* JobApp.app */;
+			productReference = 271204362B81584D00F618DB /* Jobitti.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -245,7 +245,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2712041B2B81556C00F618DB /* Build configuration list for PBXProject "JobApp" */;
+			buildConfigurationList = 2712041B2B81556C00F618DB /* Build configuration list for PBXProject "Jobitti" */;
 			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -261,7 +261,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				271204352B81584D00F618DB /* JobApp */,
+				271204352B81584D00F618DB /* Jobitti */,
 			);
 		};
 /* End PBXProject section */
@@ -311,7 +311,7 @@
 				27CA89B42BA11902009AAA9C /* SessionManager.swift in Sources */,
 				27D601D42B8BEDDE002CC59D /* JobList.swift in Sources */,
 				27CA89BE2BA1A293009AAA9C /* ApplicationView.swift in Sources */,
-				2712043A2B81584D00F618DB /* JobApp.swift in Sources */,
+				2712043A2B81584D00F618DB /* Jobitti.swift in Sources */,
 				2740DA332B8BD61A001E2C4A /* Configure.swift in Sources */,
 				27CA89AB2BA0DDCF009AAA9C /* HttpError+SampleData.swift in Sources */,
 				278E36752B8E849300EAEC55 /* FiltersView.swift in Sources */,
@@ -394,7 +394,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = JobApp/Resources/JobApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Jobitti/Resources/Jobitti.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
@@ -419,7 +419,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = JobApp/Resources/Info.plist;
+				INFOPLIST_FILE = Jobitti/Resources/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -486,7 +486,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = JobApp/Resources/JobApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Jobitti/Resources/Jobitti.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
@@ -505,7 +505,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = JobApp/Resources/Info.plist;
+				INFOPLIST_FILE = Jobitti/Resources/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -537,7 +537,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2712041B2B81556C00F618DB /* Build configuration list for PBXProject "JobApp" */ = {
+		2712041B2B81556C00F618DB /* Build configuration list for PBXProject "Jobitti" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2712041C2B81556C00F618DB /* Debug */,
@@ -546,7 +546,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		271204432B81584E00F618DB /* Build configuration list for PBXNativeTarget "JobApp" */ = {
+		271204432B81584E00F618DB /* Build configuration list for PBXNativeTarget "Jobitti" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				271204442B81584E00F618DB /* Debug */,
