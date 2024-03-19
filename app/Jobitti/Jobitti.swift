@@ -2,7 +2,7 @@ import SwiftUI
 import Networking
 
 @main
-struct JobApp: App {
+struct Jobitti: App {
 	private let networking: FoundationHttpNetworking
 	private let session: Session
 	private let configurationService: ConfigurationService
