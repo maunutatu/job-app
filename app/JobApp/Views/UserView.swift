@@ -201,6 +201,7 @@ struct UserView<ViewModel: UserViewModelProtocol>: View {
 			.buttonStyle(BorderedProminentButtonStyle())
 			.listRowBackground(EmptyView())
 		}
+		.scrollDismissesKeyboard(.immediately)
 	}
 
 	private func addSkill() {
