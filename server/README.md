@@ -10,7 +10,7 @@ Brief overview on the available endpoints. For more detailed information about e
 
 ### User Endpoints
 
-- `GET /users/:userID`: Retrieves a user along with their job applications and favorite job listings. Replace `:userID` with the ID of the user. Returns a JSON object of the user or an error message.
+- `GET /users/:username`: Retrieves a user along with their job applications and favorite job listings. Replace `:username` with the username of the user. Returns a JSON object of the user or an error message.
 
 - `POST /users`: Creates a new user. Requires a JSON object in the request body with the details of the user. Returns a JSON object of the created user or an error message.
 

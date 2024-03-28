@@ -64,24 +64,26 @@ func (q *Queries) CreateJobApplication(ctx context.Context, arg CreateJobApplica
 }
 
 const createUser = `-- name: CreateUser :one
-INSERT INTO "user" (first_name, last_name, phone_number, email, date_of_birth, experience, education, skills)
-VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-RETURNING id, first_name, last_name, phone_number, email, date_of_birth, experience, education, skills
+INSERT INTO "user" (username, first_name, last_name, phone_number, email, date_of_birth, experience, education, skills)
+VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+RETURNING id, username, first_name, last_name, phone_number, email, date_of_birth, experience, education, skills
 `
 
 type CreateUserParams struct {
+	Username    string
 	FirstName   string
 	LastName    string
 	PhoneNumber string
 	Email       string
 	DateOfBirth pgtype.Date
-	Experience  string
+	Experience  []string
 	Education   string
 	Skills      []string
 }
 
 func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, error) {
 	row := q.db.QueryRow(ctx, createUser,
+		arg.Username,
 		arg.FirstName,
 		arg.LastName,
 		arg.PhoneNumber,
@@ -94,6 +96,7 @@ func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, e
 	var i User
 	err := row.Scan(
 		&i.ID,
+		&i.Username,
 		&i.FirstName,
 		&i.LastName,
 		&i.PhoneNumber,
@@ -227,6 +230,7 @@ func (q *Queries) GetJobListings(ctx context.Context) ([]GetJobListingsRow, erro
 
 const getUser = `-- name: GetUser :one
 SELECT u.id,
+       u.username,
        u.first_name,
        u.last_name,
        u.phone_number,
@@ -236,14 +240,15 @@ SELECT u.id,
        u.education,
        u.skills
 FROM "user" u
-WHERE u.id = $1
+WHERE u.username = $1
 `
 
-func (q *Queries) GetUser(ctx context.Context, id int32) (User, error) {
-	row := q.db.QueryRow(ctx, getUser, id)
+func (q *Queries) GetUser(ctx context.Context, username string) (User, error) {
+	row := q.db.QueryRow(ctx, getUser, username)
 	var i User
 	err := row.Scan(
 		&i.ID,
+		&i.Username,
 		&i.FirstName,
 		&i.LastName,
 		&i.PhoneNumber,
@@ -446,26 +451,28 @@ func (q *Queries) UpdateJobApplication(ctx context.Context, arg UpdateJobApplica
 
 const updateUser = `-- name: UpdateUser :one
 UPDATE "user"
-SET first_name    = $2,
-    last_name     = $3,
-    phone_number  = $4,
-    email         = $5,
-    date_of_birth = $6,
-    experience    = $7,
-    education     = $8,
-    skills        = $9
+SET username      = $2,
+    first_name    = $3,
+    last_name     = $4,
+    phone_number  = $5,
+    email         = $6,
+    date_of_birth = $7,
+    experience    = $8,
+    education     = $9,
+    skills        = $10
 WHERE id = $1
-RETURNING id, first_name, last_name, phone_number, email, date_of_birth, experience, education, skills
+RETURNING id, username, first_name, last_name, phone_number, email, date_of_birth, experience, education, skills
 `
 
 type UpdateUserParams struct {
 	ID          int32
+	Username    string
 	FirstName   string
 	LastName    string
 	PhoneNumber string
 	Email       string
 	DateOfBirth pgtype.Date
-	Experience  string
+	Experience  []string
 	Education   string
 	Skills      []string
 }
@@ -473,6 +480,7 @@ type UpdateUserParams struct {
 func (q *Queries) UpdateUser(ctx context.Context, arg UpdateUserParams) (User, error) {
 	row := q.db.QueryRow(ctx, updateUser,
 		arg.ID,
+		arg.Username,
 		arg.FirstName,
 		arg.LastName,
 		arg.PhoneNumber,
@@ -485,6 +493,7 @@ func (q *Queries) UpdateUser(ctx context.Context, arg UpdateUserParams) (User, e
 	var i User
 	err := row.Scan(
 		&i.ID,
+		&i.Username,
 		&i.FirstName,
 		&i.LastName,
 		&i.PhoneNumber,

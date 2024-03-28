@@ -18,6 +18,7 @@ FROM job_listing jl
 
 -- name: GetUser :one
 SELECT u.id,
+       u.username,
        u.first_name,
        u.last_name,
        u.phone_number,
@@ -27,7 +28,7 @@ SELECT u.id,
        u.education,
        u.skills
 FROM "user" u
-WHERE u.id = $1;
+WHERE u.username = $1;
 
 -- name: GetUserJobApplications :many
 SELECT ja.id,
@@ -67,20 +68,21 @@ FROM user_favorite_job_listing ufl
 WHERE ufl."user" = $1;
 
 -- name: CreateUser :one
-INSERT INTO "user" (first_name, last_name, phone_number, email, date_of_birth, experience, education, skills)
-VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+INSERT INTO "user" (username, first_name, last_name, phone_number, email, date_of_birth, experience, education, skills)
+VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
 RETURNING *;
 
 -- name: UpdateUser :one
 UPDATE "user"
-SET first_name    = $2,
-    last_name     = $3,
-    phone_number  = $4,
-    email         = $5,
-    date_of_birth = $6,
-    experience    = $7,
-    education     = $8,
-    skills        = $9
+SET username      = $2,
+    first_name    = $3,
+    last_name     = $4,
+    phone_number  = $5,
+    email         = $6,
+    date_of_birth = $7,
+    experience    = $8,
+    education     = $9,
+    skills        = $10
 WHERE id = $1
 RETURNING *;
 

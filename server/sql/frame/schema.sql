@@ -25,12 +25,13 @@ CREATE TABLE IF NOT EXISTS job_listing (
 
 CREATE TABLE IF NOT EXISTS "user" (
     id SERIAL PRIMARY KEY,
+    username VARCHAR(100) NOT NULL UNIQUE,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     phone_number TEXT NOT NULL,
     email TEXT NOT NULL,
     date_of_birth DATE NOT NULL,
-    experience TEXT NOT NULL,
+    experience TEXT[] NOT NULL,
     education TEXT NOT NULL,
     skills TEXT[] NOT NULL
     );
