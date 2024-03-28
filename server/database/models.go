@@ -45,12 +45,13 @@ type JobListing struct {
 
 type User struct {
 	ID          int32
+	Username    string
 	FirstName   string
 	LastName    string
 	PhoneNumber string
 	Email       string
 	DateOfBirth pgtype.Date
-	Experience  string
+	Experience  []string
 	Education   string
 	Skills      []string
 }
