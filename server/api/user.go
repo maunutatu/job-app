@@ -4,7 +4,6 @@ import (
 	"context"
 	"github.com/gin-gonic/gin"
 	"server/database"
-	"strconv"
 )
 
 type GetUserResponse struct {
@@ -15,27 +14,20 @@ type GetUserResponse struct {
 
 func (s *Service) GetUser(c *gin.Context) {
 	userIDStr := c.Param("userID")
-	userID, err := strconv.Atoi(userIDStr)
-
-	if err != nil {
-		c.JSON(400, gin.H{"error": "Invalid user id"})
-		return
-	}
-
-	user, err := s.queries.GetUser(context.Background(), int32(userID))
+	user, err := s.queries.GetUser(context.Background(), userIDStr)
 
 	if err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
 		return
 	}
 
-	jobApplications, err := s.queries.GetUserJobApplications(context.Background(), int32(userID))
+	jobApplications, err := s.queries.GetUserJobApplications(context.Background(), user.ID)
 	if err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
 		return
 	}
 
-	favoriteJobListings, err := s.queries.GetUserFavoriteJobListings(context.Background(), int32(userID))
+	favoriteJobListings, err := s.queries.GetUserFavoriteJobListings(context.Background(), user.ID)
 	if err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
 		return
