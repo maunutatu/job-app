@@ -46,8 +46,7 @@ struct ApplicationList<ViewModel: ApplicationsViewModelProtocol>: View {
 		ApplicationListRow(application: application)
 			.background(
 				RoundedRectangle(cornerRadius: 12)
-					.foregroundStyle(.background)
-					.shadow(color: .gray, radius: 1)
+					.foregroundStyle(Color(selectedApplication == application ? .mainListItemSelected : .mainListItem))
 			)
 			.onTapGesture {
 				selectedApplication = application

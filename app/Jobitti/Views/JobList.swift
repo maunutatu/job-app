@@ -56,11 +56,12 @@ struct JobList<ViewModel: JobsViewModelProtocol>: View {
 		JobListRow(job: job)
 			.background(
 				RoundedRectangle(cornerRadius: 12)
-					.foregroundStyle(.background)
-					.shadow(color: .gray, radius: 1)
+					.foregroundStyle(Color(selectedJob == job ? .mainListItemSelected : .mainListItem))
 			)
 			.onTapGesture {
-				selectedJob = job
+				withAnimation(.easeInOut(duration: 0.05)) {
+					selectedJob = job
+				}
 			}
 			.listRowSeparator(.hidden)
 			.listRowBackground(Color.clear)
