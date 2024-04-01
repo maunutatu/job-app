@@ -3,13 +3,13 @@ import Networking
 
 @MainActor
 protocol UserViewModelProtocol: ObservableObject {
-	var userId: User.ID? { get }
+	var username: String? { get }
 	var state: UserViewState { get }
 	var saveButtonState: UserViewSaveButtonState { get }
 	var presentedError: LocalizedAlertError? { get set }
 
 	func save(template: UserTemplate)
-	func login(withId id: User.ID)
+	func login(withUsername username: String)
 	func logout()
 }
 
@@ -29,7 +29,7 @@ class UserViewModel<
 	ConfigurationService: ConfigurationServiceProtocol,
 	UserService: UserServiceProtocol
 >: UserViewModelProtocol {
-	@Published var userId: User.ID?
+	@Published var username: String?
 	@Published var state = UserViewState.loading
 	@Published var saveButtonState = UserViewSaveButtonState.ready
 	@Published var presentedError: LocalizedAlertError?
@@ -39,15 +39,15 @@ class UserViewModel<
 	private let userService: UserService
 
 	init(session: Session, configurationService: ConfigurationService, userService: UserService) {
-		self.userId = configurationService.get(Configuration.currentUserId)
+		self.username = configurationService.get(Configuration.currentUsername)
 		self.session = session
 		self.configurationService = configurationService
 		self.userService = userService
 
 		Task {
 			do {
-				if let userId = userId {
-					setUser(try await userService.getUser(withId: userId))
+				if let username {
+					setUser(try await userService.getUser(withUsername: username))
 				} else {
 					setUser(nil)
 				}
@@ -61,9 +61,10 @@ class UserViewModel<
 		saveButtonState = .loading
 		Task {
 			do {
-				if let userId {
-					_ = try await userService.updateUser(User(id: userId, template: template))
-					setUser(try await userService.getUser(withId: userId))
+				if let username {
+					let user = try await userService.getUser(withUsername: username)
+					_ = try await userService.updateUser(User(id: user.id, template: template))
+					setUser(try await userService.getUser(withUsername: username))
 				} else {
 					setUser(try await userService.createUser(from: template))
 				}
@@ -75,12 +76,12 @@ class UserViewModel<
 		}
 	}
 
-	func login(withId id: User.ID) {
+	func login(withUsername username: String) {
 		let oldState = state
 		state = .loading
 		Task {
 			do {
-				setUser(try await userService.getUser(withId: id))
+				setUser(try await userService.getUser(withUsername: username))
 			} catch {
 				state = oldState
 			}
@@ -92,8 +93,8 @@ class UserViewModel<
 	}
 
 	private func setUser(_ user: User?) {
-		userId = user?.id
-		configurationService.set(user?.id, for: Configuration.currentUserId)
+		username = user?.username
+		configurationService.set(user?.username, for: Configuration.currentUsername)
 		state = .ready(user.map(UserTemplate.init) ?? UserTemplate())
 		session.user = user
 	}
@@ -101,15 +102,15 @@ class UserViewModel<
 
 class SampleUserViewModel: UserViewModelProtocol {
 	private let userService = SampleUserService()
-	var userId: User.ID?
+	var username: String?
 	let state: UserViewState
 	let saveButtonState: UserViewSaveButtonState = .ready
 	var presentedError: LocalizedAlertError?
 
 	init(loggedIn: Bool) {
 		do {
-			let user = try userService.getUser(withId: loggedIn ? 1 : 0)
-			userId = user.id
+			let user = try userService.getUser(withUsername: loggedIn ? "JohnDoe" : "Nobody")
+			username = user.username
 			state = .ready(UserTemplate(user: user))
 		} catch let error as HttpError where error.status == .notFound {
 			state = .ready(UserTemplate())
@@ -120,16 +121,17 @@ class SampleUserViewModel: UserViewModelProtocol {
 
 	func save(template: UserTemplate) {
 		do {
-			if let userId {
-				_ = try userService.updateUser(User(id: userId, template: template))
+			if let username {
+				let user = try userService.getUser(withUsername: username)
+				_ = try userService.updateUser(User(id: user.id, template: template))
 			} else {
-				userId = try userService.createUser(from: template).id
+				username = try userService.createUser(from: template).username
 			}
 		} catch {
 			fatalError("Failed to save user: \(error)")
 		}
 	}
 
-	func login(withId id: User.ID) {}
+	func login(withUsername username: String) {}
 	func logout() {}
 }

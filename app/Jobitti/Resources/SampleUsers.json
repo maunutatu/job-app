@@ -1,6 +1,7 @@
 [
 	{
 		"ID": 1,
+		"Username": "JohnDoe",
 		"FirstName": "John",
 		"LastName": "Doe",
 		"PhoneNumber": "+358440000000",

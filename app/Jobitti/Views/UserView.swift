@@ -4,8 +4,9 @@ struct UserView<ViewModel: UserViewModelProtocol>: View {
 	@ObservedObject private var viewModel: ViewModel
 
 	@State var isLoginPresented = false
-	@State var loginUserId = Int?.none
+	@State var loginUsername = ""
 
+	@State var username: String = ""
 	@State var firstName: String = ""
 	@State var lastName: String = ""
 	@State var phoneNumber: String = ""
@@ -22,7 +23,15 @@ struct UserView<ViewModel: UserViewModelProtocol>: View {
 	@FocusState private var focusedField: Field?
 
 	enum Field: Hashable {
-		case firstName, lastName, phoneNumber, email, dateOfBirth, experience, education, skill(index: Int)
+		case username
+		case firstName
+		case lastName
+		case phoneNumber
+		case email
+		case dateOfBirth
+		case experience
+		case education
+		case skill(index: Int)
 	}
 
 	var body: some View {
@@ -46,9 +55,9 @@ struct UserView<ViewModel: UserViewModelProtocol>: View {
 							setState(from: template)
 						}
 						.alert("user.login", isPresented: $isLoginPresented) {
-							TextField("user.userId", value: $loginUserId, format: .number)
+							TextField("user.loginPlaceholder", text: $loginUsername)
 							Button("common.cancel", role: .cancel) {
-								loginUserId = nil
+								loginUsername = ""
 							}
 							Button("common.done", action: login)
 						}
@@ -60,7 +69,7 @@ struct UserView<ViewModel: UserViewModelProtocol>: View {
 
 	private var content: some View {
 		Form {
-			if viewModel.userId == nil {
+			if viewModel.username == nil {
 				VStack {
 					Button("user.loginButton") {
 						isLoginPresented = true
@@ -75,6 +84,17 @@ struct UserView<ViewModel: UserViewModelProtocol>: View {
 			}
 
 			Section("user.personalInfoHeader") {
+				VStack(alignment: .leading) {
+					TextField("user.usernamePlaceholder", text: $username)
+						.font(.title2)
+						.focused($focusedField, equals: .username)
+						.submitLabel(.next)
+						.onSubmit {
+							focusedField = .firstName
+						}
+						.padding(.vertical, 6)
+				}
+
 				VStack(alignment: .leading) {
 					Text("user.firstName")
 						.font(.headline)
@@ -180,7 +200,7 @@ struct UserView<ViewModel: UserViewModelProtocol>: View {
 
 			VStack(spacing: 16) {
 				HStack(spacing: 32) {
-					if viewModel.userId != nil {
+					if viewModel.username != nil {
 						Button("user.logoutButton", role: .destructive) {
 							viewModel.logout()
 						}
@@ -196,8 +216,8 @@ struct UserView<ViewModel: UserViewModelProtocol>: View {
 						}
 					}
 				}
-				if let userId = viewModel.userId {
-					Text(String(format: String(localized: "user.logoutSubtitle"), userId))
+				if let username = viewModel.username {
+					Text(String(format: String(localized: "user.logoutSubtitle"), username))
 						.font(.footnote)
 				}
 			}
@@ -220,6 +240,7 @@ struct UserView<ViewModel: UserViewModelProtocol>: View {
 	private func save() {
 		skills = skills.filter { !$0.isEmpty }
 		let template = UserTemplate(
+			username: username,
 			firstName: firstName,
 			lastName: lastName,
 			phoneNumber: phoneNumber,
@@ -233,12 +254,13 @@ struct UserView<ViewModel: UserViewModelProtocol>: View {
 	}
 
 	private func login() {
-		guard let loginUserId else { return }
-		viewModel.login(withId: loginUserId)
-		self.loginUserId = nil
+		guard !loginUsername.isEmpty else { return }
+		viewModel.login(withUsername: loginUsername)
+		loginUsername = ""
 	}
 
 	private func setState(from template: UserTemplate) {
+		username = template.username
 		firstName = template.firstName
 		lastName = template.lastName
 		phoneNumber = template.phoneNumber

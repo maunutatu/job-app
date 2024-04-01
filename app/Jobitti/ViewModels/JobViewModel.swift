@@ -59,7 +59,7 @@ class JobViewModel<
 		Task {
 			do {
 				_ = try await jobService.sendApplication(template)
-				session.user = try? await userService.getUser(withId: user.id)
+				session.user = try? await userService.getUser(withUsername: user.username)
 				state = .applicationSent
 			} catch {
 				presentedError = LocalizedAlertError(error: error)

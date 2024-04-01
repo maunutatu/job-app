@@ -812,6 +812,23 @@
         }
       }
     },
+    "user.loginPlaceholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your username"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Käyttäjänimesi"
+          }
+        }
+      }
+    },
     "user.loginSubtitle" : {
       "localizations" : {
         "en" : {
@@ -849,13 +866,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your user ID: %d"
+            "value" : "Your username: %@"
           }
         },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Käyttäjänumerosi: %d"
+            "value" : "Käyttäjänimesi: %@"
           }
         }
       }
@@ -989,18 +1006,18 @@
         }
       }
     },
-    "user.userId" : {
+    "user.usernamePlaceholder" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your user ID"
+            "value" : "Username"
           }
         },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Käyttäjänumerosi"
+            "value" : "Käyttäjänimi"
           }
         }
       }
