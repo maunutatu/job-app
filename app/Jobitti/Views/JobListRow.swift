@@ -11,7 +11,6 @@ struct JobListRow: View {
 				Text(job.company + " • " + job.location)
 				Text(job.employmentType)
 			}
-			.foregroundStyle(.gray)
 			.font(.footnote)
 			Divider()
 			Text(job.description)
