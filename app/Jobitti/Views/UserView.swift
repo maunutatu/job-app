@@ -12,7 +12,7 @@ struct UserView<ViewModel: UserViewModelProtocol>: View {
 	@State var phoneNumber: String = ""
 	@State var email: String = ""
 	@State var dateOfBirth: Date = .now
-	@State var experience: String = ""
+	@State var experience: [String] = []
 	@State var education: String = ""
 	@State var skills: [String] = []
 
@@ -29,7 +29,7 @@ struct UserView<ViewModel: UserViewModelProtocol>: View {
 		case phoneNumber
 		case email
 		case dateOfBirth
-		case experience
+		case experience(index: Int)
 		case education
 		case skill(index: Int)
 	}
@@ -150,12 +150,31 @@ struct UserView<ViewModel: UserViewModelProtocol>: View {
 				VStack(alignment: .leading) {
 					Text("user.experience")
 						.font(.headline)
-					TextField("user.experiencePlaceholder", text: $experience)
-						.focused($focusedField, equals: .experience)
-						.submitLabel(.next)
-						.onSubmit {
-							focusedField = .education
+					ForEach($experience.indices, id: \.self) { index in
+						HStack {
+							TextField("user.experiencePlaceholder", text: $experience[index])
+								.focused($focusedField, equals: .experience(index: index))
+								.submitLabel(.next)
+								.onSubmit {
+									focusedField = .education
+								}
+							Button {
+								removeExperience(index)
+							} label: {
+								Image(systemName: "trash.fill")
+							}
+							.buttonStyle(BorderlessButtonStyle())
 						}
+						.frame(minHeight: 32)
+						Divider()
+					}
+					Button(action: addExperience) {
+						Image(systemName: "plus")
+						Text("user.addExperience")
+					}
+					.padding(4)
+					.buttonStyle(BorderlessButtonStyle())
+					.disabled(!experience.isEmpty && experience.last?.isEmpty == true)
 				}
 
 				VStack(alignment: .leading) {
@@ -228,9 +247,20 @@ struct UserView<ViewModel: UserViewModelProtocol>: View {
 		.scrollDismissesKeyboard(.immediately)
 	}
 
+	private func addExperience() {
+		guard experience.last?.isEmpty != true else { return }
+		experience.append("")
+		focusedField = experience.indices.last.map { .experience(index: $0) }
+	}
+
+	private func removeExperience(_ index: Int) {
+		experience.remove(at: index)
+	}
+
 	private func addSkill() {
 		guard skills.last?.isEmpty != true else { return }
 		skills.append("")
+		focusedField = skills.indices.last.map { .skill(index: $0) }
 	}
 
 	private func removeSkill(_ index: Int) {

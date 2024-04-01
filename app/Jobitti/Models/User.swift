@@ -8,7 +8,7 @@ struct User: Identifiable, Codable, Hashable {
 	let phoneNumber: String
 	let email: String
 	let dateOfBirth: Date
-	let experience: String
+	let experience: [String]
 	let education: String
 	let skills: [String]
 	let jobApplications: [JobApplication]?
@@ -35,11 +35,11 @@ struct UserTemplate: Encodable, Equatable {
 	let phoneNumber: String
 	let email: String
 	let dateOfBirth: Date
-	let experience: String
+	let experience: [String]
 	let education: String
 	let skills: [String]
 
-	internal init(username: String, firstName: String, lastName: String, phoneNumber: String, email: String, dateOfBirth: Date, experience: String, education: String, skills: [String]) {
+	internal init(username: String, firstName: String, lastName: String, phoneNumber: String, email: String, dateOfBirth: Date, experience: [String], education: String, skills: [String]) {
 		self.username = username
 		self.firstName = firstName
 		self.lastName = lastName
@@ -58,7 +58,7 @@ struct UserTemplate: Encodable, Equatable {
 		phoneNumber = ""
 		email = ""
 		dateOfBirth = Date()
-		experience = ""
+		experience = []
 		education = ""
 		skills = []
 	}

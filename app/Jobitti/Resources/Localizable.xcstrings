@@ -588,6 +588,22 @@
         }
       }
     },
+    "user.addExperience" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add experience"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lisää työkokemus"
+          }
+        }
+      }
+    },
     "user.addSkill" : {
       "localizations" : {
         "en" : {
