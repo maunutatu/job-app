@@ -14,7 +14,7 @@ enum Configuration {
 		}
 	}
 
-	static let currentUserId = Key<User.ID>("currentUserId")
+	static let currentUsername = Key<String>("currentUsername")
 }
 
 class ConfigurationService: ConfigurationServiceProtocol {

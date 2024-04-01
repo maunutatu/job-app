@@ -2,18 +2,20 @@ import Foundation
 
 struct User: Identifiable, Codable, Hashable {
 	let id: Int
+	let username: String
 	let firstName: String
 	let lastName: String
 	let phoneNumber: String
 	let email: String
 	let dateOfBirth: Date
-	let experience: String
+	let experience: [String]
 	let education: String
 	let skills: [String]
 	let jobApplications: [JobApplication]?
 
 	enum CodingKeys: String, CodingKey {
 		case id = "ID"
+		case username = "Username"
 		case firstName = "FirstName"
 		case lastName = "LastName"
 		case phoneNumber = "PhoneNumber"
@@ -27,16 +29,18 @@ struct User: Identifiable, Codable, Hashable {
 }
 
 struct UserTemplate: Encodable, Equatable {
+	let username: String
 	let firstName: String
 	let lastName: String
 	let phoneNumber: String
 	let email: String
 	let dateOfBirth: Date
-	let experience: String
+	let experience: [String]
 	let education: String
 	let skills: [String]
 
-	internal init(firstName: String, lastName: String, phoneNumber: String, email: String, dateOfBirth: Date, experience: String, education: String, skills: [String]) {
+	internal init(username: String, firstName: String, lastName: String, phoneNumber: String, email: String, dateOfBirth: Date, experience: [String], education: String, skills: [String]) {
+		self.username = username
 		self.firstName = firstName
 		self.lastName = lastName
 		self.phoneNumber = phoneNumber
@@ -48,12 +52,13 @@ struct UserTemplate: Encodable, Equatable {
 	}
 
 	init() {
+		username = ""
 		firstName = ""
 		lastName = ""
 		phoneNumber = ""
 		email = ""
 		dateOfBirth = Date()
-		experience = ""
+		experience = []
 		education = ""
 		skills = []
 	}
@@ -62,6 +67,7 @@ struct UserTemplate: Encodable, Equatable {
 extension User {
 	init(id: User.ID, template: UserTemplate) {
 		self.id = id
+		username = template.username
 		firstName = template.firstName
 		lastName = template.lastName
 		phoneNumber = template.phoneNumber
@@ -76,6 +82,7 @@ extension User {
 
 extension UserTemplate {
 	init(user: User) {
+		username = user.username
 		firstName = user.firstName
 		lastName = user.lastName
 		phoneNumber = user.phoneNumber

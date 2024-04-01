@@ -2,7 +2,7 @@ import Foundation
 import Networking
 
 protocol UserServiceProtocol {
-	func getUser(withId id: User.ID) async throws -> User
+	func getUser(withUsername username: String) async throws -> User
 	func createUser(from template: UserTemplate) async throws -> User
 	func updateUser(_ user: User) async throws -> User
 }
@@ -24,12 +24,12 @@ class UserService<Networking: HttpNetworking>: UserServiceProtocol {
 		self.networking = networking
 	}
 
-	func getUser(withId id: User.ID) async throws -> User {
+	func getUser(withUsername username: String) async throws -> User {
 		try decoder.decode(User.self, from: await networking.perform(
 			method: .get,
 			scheme: "http",
 			host: host,
-			path: "/users/\(id)"
+			path: "/users/\(username)"
 		))
 	}
 
@@ -74,8 +74,8 @@ class SampleUserService: UserServiceProtocol {
 		}
 	}
 
-	func getUser(withId id: User.ID) throws -> User {
-		guard let user = users.first(where: { $0.id == id }) else {
+	func getUser(withUsername username: String) throws -> User {
+		guard let user = users.first(where: { $0.username == username }) else {
 			throw HttpError.sampleDataError(code: 404)
 		}
 		return user

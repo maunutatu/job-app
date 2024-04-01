@@ -18,7 +18,7 @@ enum PreviewData {
 	}()
 
 	static let sampleUser = {
-		guard let user = try? userService.getUser(withId: 1) else {
+		guard let user = try? userService.getUser(withUsername: "JohnDoe") else {
 			fatalError("No user in sample list")
 		}
 		return user
