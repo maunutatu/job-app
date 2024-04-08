@@ -23,10 +23,17 @@ struct FiltersView<ViewModel: FiltersViewModelProtocol>: View {
 				Text("filters.location")
 					.font(.headline)
 				Divider()
+				if let remoteIndex = viewModel.locations.firstIndex(where: { $0.name == "Etätyö" }) {
+					Toggle(viewModel.locations[remoteIndex].name, isOn: $viewModel.locations[remoteIndex].isEnabled)
+						.toggleStyle(.button)
+					Divider()
+				}
 				HFlow {
 					ForEach(Array(viewModel.locations.enumerated()), id: \.offset) { index, location in
-						Toggle(location.name, isOn: $viewModel.locations[index].isEnabled)
-							.toggleStyle(.button)
+						if location.name != "Etätyö" {
+							Toggle(location.name, isOn: $viewModel.locations[index].isEnabled)
+								.toggleStyle(.button)
+						}
 					}
 				}
 			}
