@@ -37,7 +37,6 @@ class JobViewModel<
 		self.userService = userService
 
 		session.$user
-			.dropFirst()
 			.map { Self.state(user: $0, job: job) }
 			.assign(to: \.state, on: self)
 			.store(in: &cancellables)
