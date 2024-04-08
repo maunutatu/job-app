@@ -59,21 +59,21 @@ struct FiltersView<ViewModel: FiltersViewModelProtocol>: View {
 				HStack {
 					Picker(selection: $viewModel.scheduleStart) {
 						ForEach(0...23, id: \.self) {
-							Text(String($0))
+							Text(verbatim: "\($0):00")
 						}
 					} label: {
 						EmptyView()
 					}
-					.frame(width: 64)
+					.frame(width: 96)
 					Text(verbatim: "–")
 					Picker(selection: $viewModel.scheduleEnd) {
 						ForEach(1...24, id: \.self) {
-							Text(String($0))
+							Text(verbatim: "\($0):00")
 						}
 					} label: {
 						EmptyView()
 					}
-					.frame(width: 64)
+					.frame(width: 96)
 				}
 				.pickerStyle(MenuPickerStyle())
 			}
