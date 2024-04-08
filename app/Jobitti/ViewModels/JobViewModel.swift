@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 
 @MainActor
 protocol JobViewModelProtocol: ObservableObject {
@@ -20,12 +21,14 @@ class JobViewModel<
 	UserService: UserServiceProtocol
 >: JobViewModelProtocol {
 	let job: Job
-	@Published var state: JobViewState
+	@Published var state: JobViewState = .notLoggedIn
 	@Published var presentedError: LocalizedAlertError?
 
 	private let session: Session
 	private let jobService: JobService
 	private let userService: UserService
+
+	private var cancellables = Set<AnyCancellable>()
 
 	init(session: Session, jobService: JobService, userService: UserService, job: Job) {
 		self.job = job
@@ -33,14 +36,20 @@ class JobViewModel<
 		self.jobService = jobService
 		self.userService = userService
 
-		if let user = session.user {
-			if let applications = user.jobApplications, applications.contains(where: { $0.jobId == job.id }) {
-				state = .applicationSent
-			} else {
-				state = .loggedIn(skills: user.skills)
-			}
+		session.$user
+			.dropFirst()
+			.map { Self.state(user: $0, job: job) }
+			.assign(to: \.state, on: self)
+			.store(in: &cancellables)
+	}
+
+	private static func state(user: User?, job: Job) -> JobViewState {
+		guard let user = user else { return .notLoggedIn }
+
+		if let applications = user.jobApplications, applications.contains(where: { $0.jobId == job.id }) {
+			return .applicationSent
 		} else {
-			state = .notLoggedIn
+			return .loggedIn(skills: user.skills)
 		}
 	}
 
