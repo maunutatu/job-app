@@ -30,7 +30,12 @@ struct JobView<ViewModel: JobViewModelProtocol>: View {
 					case .loggedIn(let skills):
 						application
 							.onChange(of: viewModel.state, initial: true) {
-								self.skills = skills.map { Skill(name: $0, isSelected: false) }
+								self.skills = skills.map { name in
+									Skill(
+										name: name,
+										isSelected: self.skills.contains { $0.name == name && $0.isSelected }
+									)
+								}
 							}
 					case .applicationSent:
 						alreadyApplied
