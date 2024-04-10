@@ -63,8 +63,8 @@ class UserViewModel<
 			do {
 				if let username {
 					let user = try await userService.getUser(withUsername: username)
-					_ = try await userService.updateUser(User(id: user.id, template: template))
-					setUser(try await userService.getUser(withUsername: username))
+					let updatedUser = try await userService.updateUser(User(id: user.id, template: template))
+					setUser(try await userService.getUser(withUsername: updatedUser.username))
 				} else {
 					setUser(try await userService.createUser(from: template))
 				}
@@ -123,7 +123,8 @@ class SampleUserViewModel: UserViewModelProtocol {
 		do {
 			if let username {
 				let user = try userService.getUser(withUsername: username)
-				_ = try userService.updateUser(User(id: user.id, template: template))
+				let updatedUser = try userService.updateUser(User(id: user.id, template: template))
+				self.username = updatedUser.username
 			} else {
 				username = try userService.createUser(from: template).username
 			}
