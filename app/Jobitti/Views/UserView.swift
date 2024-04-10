@@ -85,14 +85,16 @@ struct UserView<ViewModel: UserViewModelProtocol>: View {
 
 			Section("user.personalInfoHeader") {
 				VStack(alignment: .leading) {
+					Text("user.username")
+						.font(.headline)
 					TextField("user.usernamePlaceholder", text: $username)
-						.font(.title2)
 						.focused($focusedField, equals: .username)
 						.submitLabel(.next)
 						.onSubmit {
 							focusedField = .firstName
 						}
-						.padding(.vertical, 6)
+						.textInputAutocapitalization(.never)
+						.autocorrectionDisabled()
 				}
 
 				VStack(alignment: .leading) {
@@ -136,6 +138,8 @@ struct UserView<ViewModel: UserViewModelProtocol>: View {
 						.focused($focusedField, equals: .email)
 						.submitLabel(.next)
 						.modifier(KeyboardTypeModifier(keyboardType: .emailAddress))
+						.textInputAutocapitalization(.never)
+						.autocorrectionDisabled()
 				}
 
 				VStack(alignment: .leading) {
