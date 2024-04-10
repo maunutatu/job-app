@@ -1022,7 +1022,7 @@
         }
       }
     },
-    "user.usernamePlaceholder" : {
+    "user.username" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1034,6 +1034,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Käyttäjänimi"
+          }
+        }
+      }
+    },
+    "user.usernamePlaceholder" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "username"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "käyttäjä"
           }
         }
       }
