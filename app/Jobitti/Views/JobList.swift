@@ -73,6 +73,7 @@ struct JobList<ViewModel: JobsViewModelProtocol>: View {
 			jobList(for: jobs)
 		}
 		.searchable(text: $viewModel.searchText)
+		.autocorrectionDisabled()
 		.toolbar {
 			Button {
 				filtersShown = true
