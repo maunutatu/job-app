@@ -93,7 +93,7 @@ struct UserView<ViewModel: UserViewModelProtocol>: View {
 						.onSubmit {
 							focusedField = .firstName
 						}
-						.textInputAutocapitalization(.never)
+						.modifier(AutocapitalizationModifier(autocapitalization: .never))
 						.autocorrectionDisabled()
 				}
 
@@ -138,7 +138,7 @@ struct UserView<ViewModel: UserViewModelProtocol>: View {
 						.focused($focusedField, equals: .email)
 						.submitLabel(.next)
 						.modifier(KeyboardTypeModifier(keyboardType: .emailAddress))
-						.textInputAutocapitalization(.never)
+						.modifier(AutocapitalizationModifier(autocapitalization: .never))
 						.autocorrectionDisabled()
 				}
 
